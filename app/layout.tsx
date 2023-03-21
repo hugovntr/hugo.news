@@ -1,4 +1,18 @@
 import "./globals.css";
+import React from "react";
+import { Space_Grotesk, Montserrat } from "next/font/google";
+
+const titleFont = Space_Grotesk({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-title",
+});
+
+const sansFont = Montserrat({
+    subsets: ["latin"],
+    display: "swap",
+    variable: "--font-sans",
+});
 
 export const metadata = {
     title: "Create Next App",
@@ -11,7 +25,10 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="en">
+        <html
+            lang="en"
+            className={`${titleFont.variable} ${sansFont.variable}`}
+        >
             <body>{children}</body>
         </html>
     );

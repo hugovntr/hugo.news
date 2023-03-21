@@ -2,7 +2,7 @@ import { defineDocumentType, makeSource } from "contentlayer/source-files";
 
 export const Blog = defineDocumentType(() => ({
     name: "Blog",
-    filePathPattern: `**/*.mdx`,
+    filePathPattern: `blog/*.mdx`,
     contentType: "mdx",
     fields: {
         title: {
@@ -19,7 +19,27 @@ export const Blog = defineDocumentType(() => ({
     },
 }));
 
+export const Project = defineDocumentType(() => ({
+    name: "Project",
+    filePathPattern: `projects/*.mdx`,
+    contentType: "mdx",
+    fields: {
+        name: {
+            type: "string",
+            required: true,
+        },
+        link: {
+            type: "string",
+            required: true,
+        },
+        role: {
+            type: "string",
+            required: true,
+        },
+    },
+}));
+
 export default makeSource({
     contentDirPath: "content",
-    documentTypes: [Blog],
+    documentTypes: [Blog, Project],
 });
