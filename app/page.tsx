@@ -1,30 +1,75 @@
 import { NextPage } from "next";
 import { CSSProperties, FC } from "react";
 import { BlogSection, ProjectSection } from "@/app/sections";
+import Link from "next/link";
 
 const Page: NextPage = () => {
+    const greetings = () => {
+        const hours = new Date().getHours();
+        if (hours >= 5 && hours < 11) return "Morning";
+        if (hours >= 11 && hours < 17) return "Afternoon";
+        return "Evening";
+    };
     return (
         <>
-            <header className="relative overflow-hidden py-32 lg:py-64">
-                <div className="absolute inset-0">
-                    <div className="absolute inset-0 -z-10 w-2/3 bg-gray-900 lg:w-1/2" />
-                    <div className="pointer-events-none absolute inset-0 z-10 text-gray-500 opacity-5 mix-blend-screen blur-lg">
-                        <FullWidthText
-                            text={"HUGO"}
-                            className="mb-16 font-black"
-                        />
-                        <FullWidthText
-                            text={"VENTURA"}
-                            className="font-black"
-                        />
-                    </div>
-                </div>
-                <div className="container">
-                    <div className="relative w-2/3 lg:w-1/2">
-                        <h1 className="mb-4 text-white">Hugo Ventura.</h1>
-                        <p className="text-xl text-gray-400">
-                            Senior Software Engineer & Product Designer
+            <header className="relative overflow-hidden bg-black py-24 md:py-32 lg:py-64">
+                <div className="container grid max-w-6xl items-center gap-12 lg:grid-cols-2">
+                    <div>
+                        <p className="text-sm font-semibold uppercase tracking-widest text-emerald-400">
+                            {greetings()}, I am
                         </p>
+                        <h1 className="text-6xl text-white lg:text-8xl">
+                            Hugo Ventura.
+                        </h1>
+                    </div>
+                    <div className="flex flex-col gap-8">
+                        <div className="flex flex-col gap-3 text-xl text-gray-400 lg:text-2xl">
+                            <p>
+                                <span className="bg-gradient-to-r from-pink-500 to-indigo-400 bg-clip-text font-semibold text-transparent">
+                                    Software Engineer
+                                </span>{" "}
+                                and{" "}
+                                <span className="bg-gradient-to-r from-indigo-400 to-emerald-400 bg-clip-text font-semibold text-transparent">
+                                    Product Designer
+                                </span>{" "}
+                                with more than a decade of experience.
+                            </p>
+                            <p>
+                                I am a full stack web developer, with an higher
+                                interest for backend development.
+                            </p>
+                        </div>
+                        <div className="flex flex-col items-center gap-4 md:flex-row">
+                            <Link
+                                className="flex bg-emerald-400 px-6 py-4 font-title text-xs font-bold uppercase tracking-widest text-emerald-900 transition-colors hover:bg-pink-400 hover:text-pink-900"
+                                href={"/#projects"}
+                                scroll={false}
+                            >
+                                Open Source Projects
+                            </Link>
+                            <Link
+                                className="group flex items-center gap-2 px-6 py-4 font-title text-xs font-extrabold uppercase tracking-widest text-emerald-400"
+                                href={"/#blog"}
+                                scroll={false}
+                            >
+                                <span>Read the blog</span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="h-5 w-5"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="-translate-x-3 transition-transform group-hover:translate-x-0"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                    />
+                                </svg>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </header>

@@ -8,6 +8,7 @@ specifiers:
   '@types/react-dom': 18.0.11
   autoprefixer: ^10.4.14
   contentlayer: ^0.3.0
+  dayjs: ^1.11.7
   eslint: 8.36.0
   eslint-config-next: 13.2.4
   next: 13.2.4
@@ -28,6 +29,7 @@ dependencies:
   '@types/react-dom': 18.0.11
   autoprefixer: 10.4.14_postcss@8.4.21
   contentlayer: 0.3.0
+  dayjs: 1.11.7
   eslint: 8.36.0
   eslint-config-next: 13.2.4_j4766f7ecgqbon3u7zlxn5zszu
   next: 13.2.4_biqbaboplfbrettd7655fr4n2y
@@ -1506,6 +1508,10 @@ packages:
   /data-uri-to-buffer/4.0.1:
     resolution: {integrity: sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==}
     engines: {node: '>= 12'}
+    dev: false
+
+  /dayjs/1.11.7:
+    resolution: {integrity: sha512-+Yw9U6YO5TQohxLcIkrXBeY73WP3ejHWVvx8XCk3gxvQDCTEmS48ZrSZCKciI7Bhl/uCMyxYtE9UqRILmFphkQ==}
     dev: false
 
   /debug/3.2.7:

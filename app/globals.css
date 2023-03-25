@@ -3,17 +3,10 @@
 @layer base {
     body {
         @apply antialiased;
+        scroll-behavior: smooth;
     }
     h1, h2, h3, h4 {
-        @apply font-title;
-    }
-
-    h1 {
-        @apply text-5xl font-bold;
-    }
-
-    h2 {
-        @apply text-4xl font-bold;
+        @apply font-title font-bold;
     }
 }
 

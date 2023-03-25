@@ -6,5 +6,8 @@ const nextConfig = {
         appDir: true,
         mdxRs: true,
     },
+    images: {
+        domains: ['camo.githubusercontent.com']
+    }
 };
 export default withContentlayer(nextConfig)

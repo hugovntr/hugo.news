@@ -28,6 +28,7 @@ const Page: NextPage<{ params: Params }> = (props) => {
     const {
         params: { slug },
     } = props;
+    console.log(slug);
     const post = allBlogs.find((doc) => doc.slug === slug);
     if (!post) notFound();
 
