@@ -14,6 +14,11 @@ export const Blog = defineDocumentType(() => ({
             type: "date",
             required: true,
         },
+        lang: {
+            type: "enum",
+            options: ["fr", "en"],
+            default: "fr",
+        },
     },
     computedFields: {
         slug: {
