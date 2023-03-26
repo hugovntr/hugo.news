@@ -19,7 +19,8 @@ const Page: NextPage = () => {
                             {greetings()}, I am
                         </p>
                         <h1 className="text-6xl text-white lg:text-8xl">
-                            Hugo Ventura.
+                            Hugo Ventura
+                            <span className="text-emerald-400">.</span>
                         </h1>
                     </div>
                     <div className="flex flex-col gap-8">

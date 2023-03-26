@@ -43,6 +43,27 @@ const Page: NextPage<{ request: NextRequest; params: Params }> = (props) => {
         <section className="container max-w-4xl py-16 lg:py-24">
             <article>
                 <header className="mb-8 border-b border-gray-100 pb-8">
+                    <Link
+                        className="group -ml-6 flex items-center gap-2 px-6 py-4 font-title text-xs font-extrabold uppercase tracking-widest text-emerald-400"
+                        href={"/blog"}
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={1.5}
+                            stroke="currentColor"
+                            className="h-5 w-5"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="translate-x-3 transition-transform group-hover:translate-x-0"
+                                d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
+                            />
+                        </svg>
+                        <span>Blog</span>
+                    </Link>
                     <h1 className="mb-8 text-6xl">{post.title}</h1>
                     <div className="flex items-center gap-4 text-sm text-gray-500">
                         <time dateTime={post.publishedAt}>
