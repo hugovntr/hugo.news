@@ -17,8 +17,8 @@ export const ProjectSection: FC = () => {
                 </div>
                 <Link
                     className="flex items-center gap-2 self-center bg-white px-6 py-4 font-title text-sm font-bold uppercase tracking-widest text-black transition-colors hover:bg-pink-400 hover:text-pink-900"
-                    href={"/#projects"}
-                    scroll={false}
+                    href={"https://github.com/hugovntr"}
+                    rel="nofollow noopener"
                 >
                     <svg
                         viewBox="0 0 24 24"
