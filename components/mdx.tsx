@@ -10,8 +10,8 @@ export const Mdx: FC<MdxProps> = (props) => {
     const Component = useMDXComponent(code);
 
     return (
-        <article className={`prose ${className ?? ""}`}>
+        <main className={`prose ${className ?? ""}`}>
             <Component />
-        </article>
+        </main>
     );
 };

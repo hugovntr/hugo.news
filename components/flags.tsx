@@ -8,25 +8,9 @@ interface SVGProps extends Omit<FlagProps, "lang" | "variant"> {
 const flags = {
     fr: (props: SVGProps) => (
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 15" {...props}>
-            <defs>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="a">
-                    <stop stopColor="#FFF" offset="0%" />
-                    <stop stopColor="#F0F0F0" offset="100%" />
-                </linearGradient>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="b">
-                    <stop stopColor="#F44653" offset="0%" />
-                    <stop stopColor="#EE2A39" offset="100%" />
-                </linearGradient>
-                <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="c">
-                    <stop stopColor="#1035BB" offset="0%" />
-                    <stop stopColor="#042396" offset="100%" />
-                </linearGradient>
-            </defs>
-            <g fill="none" fillRule="evenodd">
-                <path fill="url(#b)" d="M10 0h11v15H10z" />
-                <path fill="url(#c)" d="M0 0h7v15H0z" />
-                <path fill="url(#a)" d="M7 0h7v15H7z" />
-            </g>
+            <path fill="#EE2A39" d="M10 0h11v15H10z" />
+            <path fill="#1035BB" d="M0 0h7v15H0z" />
+            <path fill="#FFF" d="M7 0h7v15H7z" />
         </svg>
     ),
     en: (props: SVGProps) => (

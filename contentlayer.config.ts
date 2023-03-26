@@ -26,6 +26,11 @@ export const Blog = defineDocumentType(() => ({
             resolve: (document) =>
                 document._raw.sourceFileName.replace(".mdx", ""),
         },
+        readingTime: {
+            type: "number",
+            resolve: (document) =>
+                Math.ceil(document.body.raw.split(/\s+/).length / 225),
+        },
     },
 }));
 
