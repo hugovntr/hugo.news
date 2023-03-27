@@ -1,6 +1,7 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
 import rehypePrettyCode from "rehype-pretty-code";
 import remarkGfm from "remark-gfm";
+import { shortenString, stripMarkdown } from "./utils/string";
 
 export const Blog = defineDocumentType(() => ({
     name: "Blog",
@@ -40,6 +41,11 @@ export const Blog = defineDocumentType(() => ({
         wordCount: {
             type: "number",
             resolve: (document) => document.body.raw.split(/\s+/gu).length,
+        },
+        summary: {
+            type: "string",
+            resolve: (document) =>
+                shortenString(stripMarkdown(document.body.raw), 255),
         },
     },
 }));

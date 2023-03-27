@@ -163,7 +163,7 @@ const BlogPost: FC<Blog> = (props) => {
                     <span className="block h-px flex-1 border border-dashed border-gray-900" />
                     <Flag lang={props.lang} className="h-5 w-5" />
                 </div>
-                <p className="text-gray-500 line-clamp-2">{props.body.raw}</p>
+                <p className="text-gray-500 line-clamp-2">{props.summary}</p>
             </div>
         </article>
     );
