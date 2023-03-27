@@ -3,8 +3,8 @@ import { allBlogs, allProjects, Blog, Project } from "contentlayer/generated";
 import Link from "next/link";
 import { Mdx } from "@/components/mdx";
 import Image from "next/image";
-import dayjs from "dayjs";
 import { Flag } from "@/components/flags";
+import { dateFormat, sortByDateDesc } from "@/utils/date";
 
 export const ProjectSection: FC = () => {
     return (
@@ -99,9 +99,12 @@ export const BlogSection: FC = () => {
         <section className="bg-black py-16" id="blog">
             <div className="container relative max-w-5xl">
                 <div className="grid grid-cols-1">
-                    {allBlogs.slice(-3).map((post) => (
-                        <BlogPost key={post.slug} {...post} />
-                    ))}
+                    {allBlogs
+                        .slice(-3)
+                        .sort(sortByDateDesc)
+                        .map((post) => (
+                            <BlogPost key={post.slug} {...post} />
+                        ))}
                 </div>
             </div>
         </section>
@@ -109,7 +112,7 @@ export const BlogSection: FC = () => {
 };
 
 const BlogPost: FC<Blog> = (props) => {
-    const date = dayjs(props.publishedAt);
+    const date = dateFormat(props.createdAt);
     return (
         <article className="flex items-start gap-6 py-6 first:pt-0 last:pb-0">
             <div className="flex h-full flex-col text-center font-title ordinal text-gray-800">

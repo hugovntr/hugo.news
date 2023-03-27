@@ -2,11 +2,11 @@ import { allBlogs, Blog } from "contentlayer/generated";
 import type { Metadata, NextPage } from "next";
 import { notFound } from "next/navigation";
 import { Mdx } from "@/components/mdx";
-import dayjs from "dayjs";
 import { Flag } from "@/components/flags";
 import { FC } from "react";
 import Link from "next/link";
 import { NextRequest } from "next/server";
+import { dateFormat } from "@/utils/date";
 
 type Params = {
     slug: string;
@@ -66,8 +66,8 @@ const Page: NextPage<{ request: NextRequest; params: Params }> = (props) => {
                     </Link>
                     <h1 className="mb-8 text-6xl">{post.title}</h1>
                     <div className="flex items-center gap-4 text-sm text-gray-500">
-                        <time dateTime={post.publishedAt}>
-                            {dayjs(post.publishedAt).format("DD MMMM YYYY")}
+                        <time dateTime={post.createdAt}>
+                            {dateFormat(post.createdAt).format("DD MMMM YYYY")}
                         </time>
                         <span className="text-gray-300">—</span>
                         <Flag lang={post.lang} className="h-5 w-5" />
@@ -103,7 +103,7 @@ const ShareActions: FC<{ link: string; title: Blog["title"] }> = (props) => {
         <div className="mt-12 flex flex-col items-center gap-2">
             <p>Share this article</p>
             <Link
-                href={shareUrls.twitter}
+                href={shareUrls.twitter.toString()}
                 target={"_blank"}
                 className="text-gray-600 transition-colors hover:text-emerald-400"
             >
