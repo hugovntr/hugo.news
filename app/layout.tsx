@@ -29,7 +29,14 @@ export default function RootLayout({
             lang="en"
             className={`${titleFont.variable} ${sansFont.variable}`}
         >
-            <body>{children}</body>
+            <body>
+                <div className="flex items-center justify-center bg-gradient-to-r from-pink-500 via-indigo-400 to-emerald-400 py-1 font-bold">
+                    <p className="mix-blend-soft-light">
+                        This is a work in progress
+                    </p>
+                </div>
+                {children}
+            </body>
         </html>
     );
 }
