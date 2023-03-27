@@ -16,7 +16,7 @@ export const ProjectSection: FC = () => {
                     ))}
                 </div>
                 <Link
-                    className="flex items-center gap-2 self-center bg-white px-6 py-4 font-title text-sm font-bold uppercase tracking-widest text-black transition-colors hover:bg-pink-400 hover:text-pink-900"
+                    className="flex items-center gap-2 self-center bg-white px-8 py-4 font-title text-sm font-bold uppercase tracking-widest text-black transition-colors hover:bg-pink-400 hover:text-pink-900"
                     href={"https://github.com/hugovntr"}
                     rel="nofollow noopener"
                 >
@@ -97,8 +97,8 @@ const Project: FC<Project> = (props) => {
 export const BlogSection: FC = () => {
     return (
         <section className="bg-black py-16" id="blog">
-            <div className="container relative max-w-5xl">
-                <div className="grid grid-cols-1">
+            <div className="container relative flex max-w-5xl flex-col">
+                <div className="mb-12 grid grid-cols-1 gap-16">
                     {allBlogs
                         .slice(-3)
                         .sort(sortByDateDesc)
@@ -106,6 +106,28 @@ export const BlogSection: FC = () => {
                             <BlogPost key={post.slug} {...post} />
                         ))}
                 </div>
+                <Link
+                    className="group flex items-center gap-2 self-center px-8 py-4 font-title text-sm font-bold uppercase tracking-widest text-emerald-400 text-black transition-colors hover:bg-emerald-400 hover:text-emerald-900"
+                    href={"/blog"}
+                    rel="nofollow noopener"
+                >
+                    <span>Read more</span>
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="currentColor"
+                        className="h-6 w-6"
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className="-translate-x-3 transition-transform group-hover:translate-x-0"
+                            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                        />
+                    </svg>
+                </Link>
             </div>
         </section>
     );
@@ -114,8 +136,8 @@ export const BlogSection: FC = () => {
 const BlogPost: FC<Blog> = (props) => {
     const date = dateFormat(props.createdAt);
     return (
-        <article className="flex items-start gap-6 py-6 first:pt-0 last:pb-0">
-            <div className="flex h-full flex-col text-center font-title ordinal text-gray-800">
+        <article className="group flex items-start gap-6">
+            <div className="flex h-full flex-col text-center font-title ordinal text-gray-800 transition-colors group-hover:text-gray-600">
                 <p className="text-3xl font-extrabold leading-none tracking-wide">
                     {date.format("DD")}
                 </p>
@@ -125,7 +147,7 @@ const BlogPost: FC<Blog> = (props) => {
             </div>
             <div>
                 <Link
-                    className="group mb-2 flex items-center gap-2 font-extrabold text-gray-50 transition-colors hover:text-emerald-400"
+                    className="group/link mb-2 flex items-center gap-2 font-extrabold text-gray-50 transition-colors hover:text-emerald-400"
                     href={`/blog/${props.slug}`}
                 >
                     <p className="font-title text-3xl font-bold">
@@ -142,7 +164,7 @@ const BlogPost: FC<Blog> = (props) => {
                         <path
                             strokeLinecap="round"
                             strokeLinejoin="round"
-                            className="-translate-x-3 opacity-0 transition group-hover:translate-x-0 group-hover:opacity-100"
+                            className="-translate-x-3 opacity-0 transition group-hover/link:translate-x-0 group-hover/link:opacity-100"
                             d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
                         />
                     </svg>
@@ -160,7 +182,7 @@ const BlogPost: FC<Blog> = (props) => {
                             ))}
                         </div>
                     )}
-                    <span className="block h-px flex-1 border border-dashed border-gray-900" />
+                    <span className="block h-px flex-1 bg-gray-900" />
                     <Flag lang={props.lang} className="h-5 w-5" />
                 </div>
                 <p className="text-gray-500 line-clamp-2">{props.summary}</p>
