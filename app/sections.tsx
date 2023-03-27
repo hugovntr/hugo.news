@@ -122,14 +122,13 @@ const BlogPost: FC<Blog> = (props) => {
                 <p className="font-extrabold uppercase leading-none tracking-wider">
                     {date.format("MMM")}
                 </p>
-                <Flag lang={props.lang} className="mt-auto h-4 w-4" />
             </div>
             <div>
                 <Link
                     className="group mb-2 flex items-center gap-2 font-extrabold text-gray-50 transition-colors hover:text-emerald-400"
                     href={`/blog/${props.slug}`}
                 >
-                    <p className="font-title text-2xl font-bold">
+                    <p className="font-title text-3xl font-bold">
                         {props.title}
                     </p>
                     <svg
@@ -138,7 +137,7 @@ const BlogPost: FC<Blog> = (props) => {
                         viewBox="0 0 24 24"
                         strokeWidth={1.5}
                         stroke="currentColor"
-                        className="h-8 w-8"
+                        className="mt-0.5 h-8 w-8"
                     >
                         <path
                             strokeLinecap="round"
@@ -148,6 +147,22 @@ const BlogPost: FC<Blog> = (props) => {
                         />
                     </svg>
                 </Link>
+                <div className="mb-4 flex items-center gap-4">
+                    {props.tags && (
+                        <div className="flex items-center gap-2">
+                            {props.tags?.map((tag) => (
+                                <button
+                                    className="bg-gray-900 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gray-600"
+                                    key={tag}
+                                >
+                                    {tag}
+                                </button>
+                            ))}
+                        </div>
+                    )}
+                    <span className="block h-px flex-1 border border-dashed border-gray-900" />
+                    <Flag lang={props.lang} className="h-5 w-5" />
+                </div>
                 <p className="text-gray-500 line-clamp-2">{props.body.raw}</p>
             </div>
         </article>

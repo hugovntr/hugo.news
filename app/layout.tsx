@@ -1,6 +1,7 @@
 import "./globals.css";
 import React from "react";
 import { Urbanist, Inter } from "next/font/google";
+import type { Metadata } from "next";
 
 const titleFont = Urbanist({
     subsets: ["latin"],
@@ -14,9 +15,21 @@ const sansFont = Inter({
     variable: "--font-sans",
 });
 
-export const metadata = {
+export const metadata: Metadata = {
     title: "Hugo Ventura.",
     description: "Senior Software Engineer & Product Designer",
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+        },
+    },
+    twitter: {
+        title: "Hugo Ventura.",
+        card: "summary_large_image",
+    },
 };
 
 export default function RootLayout({

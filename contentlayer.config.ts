@@ -1,4 +1,6 @@
 import { defineDocumentType, makeSource } from "contentlayer/source-files";
+import rehypePrettyCode from "rehype-pretty-code";
+import remarkGfm from "remark-gfm";
 
 export const Blog = defineDocumentType(() => ({
     name: "Blog",
@@ -18,6 +20,10 @@ export const Blog = defineDocumentType(() => ({
             type: "enum",
             options: ["fr", "en"],
             default: "fr",
+        },
+        tags: {
+            type: "list",
+            of: { type: "string" },
         },
     },
     computedFields: {
@@ -64,4 +70,30 @@ export const Project = defineDocumentType(() => ({
 export default makeSource({
     contentDirPath: "content",
     documentTypes: [Blog, Project],
+    mdx: {
+        remarkPlugins: [remarkGfm],
+        rehypePlugins: [
+            [
+                rehypePrettyCode,
+                {
+                    theme: "github-dark",
+                    onVisitLine(node: any) {
+                        // Prevent lines from collapsing in `display: grid` mode, and
+                        // allow empty lines to be copy/pasted
+                        if (node.children.length === 0) {
+                            node.children = [{ type: "text", value: " " }];
+                        }
+                    },
+                    onVisitHighlightedLine(node: any) {
+                        // Each line node by default has `class="line"`.
+                        node.properties.className.push("highlighted");
+                    },
+                    onVisitHighlightedWord(node: any) {
+                        // Each word node has no className by default.
+                        node.properties.className = ["word"];
+                    },
+                },
+            ],
+        ],
+    },
 });

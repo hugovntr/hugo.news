@@ -50,8 +50,7 @@ const Page: NextPage = () => {
                             </Link>
                             <Link
                                 className="group flex items-center gap-2 px-6 py-4 font-title text-xs font-extrabold uppercase tracking-widest text-emerald-400"
-                                href={"/#blog"}
-                                scroll={false}
+                                href={"/blog"}
                             >
                                 <span>Read the blog</span>
                                 <svg

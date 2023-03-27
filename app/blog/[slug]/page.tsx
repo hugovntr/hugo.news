@@ -25,7 +25,7 @@ export async function generateMetadata({
     if (!post) return;
 
     return {
-        title: post.title,
+        title: `${post.title} — Hugo Ventura.`,
     };
 }
 
@@ -42,9 +42,9 @@ const Page: NextPage<{ request: NextRequest; params: Params }> = (props) => {
     return (
         <section className="container max-w-4xl py-16 lg:py-24">
             <article>
-                <header className="mb-8 border-b border-gray-100 pb-8">
+                <header className="mb-16">
                     <Link
-                        className="group -ml-6 flex items-center gap-2 px-6 py-4 font-title text-xs font-extrabold uppercase tracking-widest text-emerald-400"
+                        className="group -ml-6 flex items-center gap-2 px-6 py-4 font-title text-sm font-extrabold uppercase tracking-widest text-emerald-400"
                         href={"/blog"}
                     >
                         <svg
@@ -64,15 +64,28 @@ const Page: NextPage<{ request: NextRequest; params: Params }> = (props) => {
                         </svg>
                         <span>Blog</span>
                     </Link>
-                    <h1 className="mb-8 text-6xl">{post.title}</h1>
-                    <div className="flex items-center gap-4 text-sm text-gray-500">
+                    <h1 className="mb-3 text-6xl">{post.title}</h1>
+                    <div className="mb-8 flex text-gray-500">
                         <time dateTime={post.createdAt}>
                             {dateFormat(post.createdAt).format("DD MMMM YYYY")}
                         </time>
-                        <span className="text-gray-300">—</span>
+                    </div>
+                    <div className="mb-4 flex items-center gap-4">
+                        {post.tags && (
+                            <div className="flex items-center gap-2">
+                                {post.tags?.map((tag) => (
+                                    <button
+                                        className="bg-gray-100 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-violet-900"
+                                        key={tag}
+                                    >
+                                        {tag}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
+                        <span className="block h-px flex-1 border border-dashed border-gray-200" />
                         <Flag lang={post.lang} className="h-5 w-5" />
-                        <span className="text-gray-300">—</span>
-                        <p>
+                        <p className="text-sm text-gray-600">
                             ~{post.readingTime}{" "}
                             {plural(post.readingTime, "minute")}
                         </p>
