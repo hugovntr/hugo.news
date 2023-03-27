@@ -35,7 +35,11 @@ export const Blog = defineDocumentType(() => ({
         readingTime: {
             type: "number",
             resolve: (document) =>
-                Math.ceil(document.body.raw.split(/\s+/).length / 225),
+                Math.ceil(document.body.raw.split(/\s+/gu).length / 225),
+        },
+        wordCount: {
+            type: "number",
+            resolve: (document) => document.body.raw.split(/\s+/gu).length,
         },
     },
 }));
