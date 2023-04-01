@@ -45,7 +45,7 @@ export const Blog = defineDocumentType(() => ({
         summary: {
             type: "string",
             resolve: (document) =>
-                shortenString(stripMarkdown(document.body.raw), 240),
+                shortenString(stripMarkdown(document.body.raw), 255),
         },
     },
 }));

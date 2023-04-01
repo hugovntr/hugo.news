@@ -51,6 +51,10 @@ export function stripMarkdown(input: string): string {
     );
 }
 
-export function shortenString(input: string, length: number): string {
-    return (input.match(RegExp(`\.{${length}}\\S*`)) || [input])[0] + "...";
+export function shortenString(
+    input: string,
+    length: number,
+    separator = " "
+): string {
+    return input.substring(0, input.lastIndexOf(separator, length)) + "...";
 }
