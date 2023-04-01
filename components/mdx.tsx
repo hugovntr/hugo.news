@@ -1,5 +1,8 @@
+"use client";
+
 import { useMDXComponent } from "next-contentlayer/hooks";
 import type { FC } from "react";
+import { MDXComponents } from "@/components/mdxComponents";
 
 type MdxProps = {
     code: string;
@@ -11,7 +14,7 @@ export const Mdx: FC<MdxProps> = (props) => {
 
     return (
         <main className={`prose ${className ?? ""}`}>
-            <Component />
+            <Component components={MDXComponents} />
         </main>
     );
 };
