@@ -5,7 +5,6 @@ import { Mdx } from "@/components/mdx";
 import { Flag } from "@/components/flags";
 import { FC } from "react";
 import Link from "next/link";
-import { NextRequest } from "next/server";
 import { dateFormat } from "@/utils/date";
 
 type Params = {
@@ -24,15 +23,32 @@ export async function generateMetadata({
     const post = allBlogs.find((doc) => doc.slug === params.slug);
     if (!post) return;
 
+    const title = `${post.title} — Hugo Ventura.`;
+
     return {
-        title: `${post.title} — Hugo Ventura.`,
+        title,
+        description: post.summary,
+        openGraph: {
+            title,
+            description: post.summary,
+            type: "article",
+            publishedTime: post.createdAt,
+            url: `https://hugo.news/blog/${post.slug}`,
+            images: [{ url: `https://hugo.news/api/og?slug=${post.slug}` }],
+        },
+        twitter: {
+            card: "summary_large_image",
+            title,
+            description: post.summary,
+            images: [`https://hugo.news/api/og?slug=${post.slug}`],
+        },
     };
 }
 
 const plural = (count: number, singular: string, plural?: string): string =>
     count === 1 ? singular : plural ?? `${singular}s`;
 
-const Page: NextPage<{ request: NextRequest; params: Params }> = (props) => {
+const Page: NextPage<{ params: Params }> = (props) => {
     const {
         params: { slug },
     } = props;
