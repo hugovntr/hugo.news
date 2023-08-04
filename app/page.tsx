@@ -8,6 +8,8 @@ import Me from "./me.jpeg";
 import { getImages } from "@/lib/images";
 import { ImageGallery } from "@/components/gallery.server";
 
+export const revalidate = 120;
+
 const Page: NextPage = async () => {
     const data = await getImages({ page_size: 13 });
 

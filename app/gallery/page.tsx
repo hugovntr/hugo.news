@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     title: "AI Gallery | Hugo Ventura.",
 };
 
+export const revalidate = 120;
+
 export default async function Page() {
     const data = await getImages({ page_size: 50 });
     return (
