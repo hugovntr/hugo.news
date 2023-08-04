@@ -2,8 +2,10 @@ import { FC } from "react";
 import { getImageUrl, ImageDatabaseItem } from "@/lib/images";
 import { parsePrompt } from "@/lib/prompt";
 import Image from "next/image";
-import { PromptPopover } from "@/app/prompt.client";
+import { PromptPopover, PromptPopoverContent } from "@/app/prompt.client";
 import { Masonry } from "@/components/masonry";
+import { ImageZoomable } from "@/components/gallery.client";
+import { Copyright } from "@/components/copyright";
 
 export const ImageGallery: FC<{ images: ImageDatabaseItem[] }> = (props) => {
     const { images } = props;
@@ -36,19 +38,25 @@ const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
     const prompt = parsePrompt(promptRaw.plain_text);
     return (
         <div>
-            <div className="relative overflow-hidden rounded-lg bg-muted/80 p-2 dark:bg-muted/50">
-                <Image
+            <div className="relative flex overflow-hidden rounded-lg bg-muted/80 p-2 dark:bg-muted/50">
+                <ImageZoomable
                     src={imageUrl}
-                    width={prompt.width}
                     height={prompt.height}
-                    unoptimized={true}
-                    className="rounded-md border border-border"
+                    width={prompt.width}
                     alt={title?.plain_text ?? ""}
-                />
-                <div className="absolute inset-0 flex items-end rounded-md">
+                >
+                    <p className="mb-2 font-title text-lg font-semibold">
+                        {title?.plain_text ?? ""}
+                    </p>
+                    {promptShare && <PromptPopoverContent {...prompt} />}
+                    <Copyright className="mt-auto" />
+                </ImageZoomable>
+                <div className="absolute bottom-0 left-0 flex items-end rounded-md">
                     <p className="-ml-1 inline-flex rounded-tr-lg bg-muted px-4 py-1 font-title text-sm font-semibold tracking-wide">
                         {title?.plain_text}
                     </p>
+                </div>
+                <div className="absolute right-4 top-4">
                     {promptShare && <PromptPopover {...prompt} />}
                 </div>
             </div>
