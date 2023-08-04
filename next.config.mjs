@@ -6,7 +6,11 @@ const nextConfig = {
         appDir: true,
     },
     images: {
-        domains: ['camo.githubusercontent.com']
+        domains: ['camo.githubusercontent.com'],
+        remotePatterns: [
+            { protocol: "https", hostname: "**.midjourney.com" },
+            { protocol: "https", hostname: "**.amazonaws.com" },
+        ]
     }
 };
-export default withContentlayer(nextConfig)
+export default nextConfig
