@@ -1,5 +1,6 @@
 import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints";
 import { Client } from "@notionhq/client";
+import { parsePrompt } from "@/lib/prompt";
 
 type ImageResult = Extract<
     QueryDatabaseResponse["results"][number],
@@ -44,6 +45,12 @@ export const getImages = async (
     return { images: db.results as ImageDatabaseItem[], more: db.has_more };
 };
 
+export const getImage = async (id: string) => {
+    const client = new Client({ auth: process.env.NOTION_TOKEN });
+    const page = await client.pages.retrieve({ page_id: id });
+    return page as ImageDatabaseItem;
+};
+
 export const getImageUrl = (
     data: ImageDatabaseItem["properties"]["Image"]
 ): string | undefined => {
@@ -57,4 +64,19 @@ export const getImageUrl = (
         default:
             return;
     }
+};
+
+export const getImageInfos = (properties: ImageDatabaseItem["properties"]) => {
+    const url = getImageUrl(properties.Image);
+    const promptRaw = properties.Prompt.rich_text.find((t) => t.plain_text);
+    if (!url || !promptRaw) {
+        return;
+    }
+    return {
+        url: url,
+        title:
+            properties.Name.title.find((t) => t.plain_text)?.plain_text ?? "",
+        prompt: parsePrompt(promptRaw?.plain_text ?? ""),
+        share: properties.PromptShare.checkbox as boolean,
+    };
 };

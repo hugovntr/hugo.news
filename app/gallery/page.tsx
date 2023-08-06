@@ -3,6 +3,8 @@ import { ImageGallery } from "@/components/gallery.server";
 import { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
+import Me from "@/app/me.jpeg";
 
 export const metadata: Metadata = {
     title: "AI Gallery | Hugo Ventura.",
@@ -14,6 +16,15 @@ export default async function Page() {
     const data = await getImages({ page_size: 50 });
     return (
         <div>
+            <div className="container">
+                <Link href="/">
+                    <Image
+                        src={Me}
+                        className="mx-auto mt-4 h-12 w-12 rounded-full bg-muted object-cover"
+                        alt="Hugo Ventura"
+                    />
+                </Link>
+            </div>
             <div className="container max-w-xl py-24">
                 <h1 className="mb-2 font-title text-2xl font-semibold">
                     AI Gallery

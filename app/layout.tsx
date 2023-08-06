@@ -36,11 +36,12 @@ export const metadata: Metadata = {
     },
 };
 
-export default function RootLayout({
-    children,
-}: {
+interface RootLayoutProps {
     children: React.ReactNode;
-}) {
+    modal: React.ReactNode;
+}
+export default function RootLayout(props: RootLayoutProps) {
+    const { children, modal } = props;
     return (
         <html
             lang="en"
@@ -62,6 +63,7 @@ export default function RootLayout({
                     </footer>
                     <Toaster />
                     <Analytics />
+                    {modal}
                 </ThemeProvider>
             </body>
         </html>
