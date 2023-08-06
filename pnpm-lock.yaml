@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@tailwindcss/line-clamp':
     specifier: ^0.4.2
@@ -16,6 +20,9 @@ dependencies:
   '@types/react-dom':
     specifier: 18.0.11
     version: 18.0.11
+  '@vercel/analytics':
+    specifier: ^1.0.1
+    version: 1.0.1
   '@vercel/og':
     specifier: ^0.5.0
     version: 0.5.0
@@ -1165,6 +1172,10 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.55.0
       eslint-visitor-keys: 3.3.0
+    dev: false
+
+  /@vercel/analytics@1.0.1:
+    resolution: {integrity: sha512-Ux0c9qUfkcPqng3vrR0GTrlQdqNJ2JREn/2ydrVuKwM3RtMfF2mWX31Ijqo1opSjNAq6rK76PwtANw6kl6TAow==}
     dev: false
 
   /@vercel/og@0.5.0:

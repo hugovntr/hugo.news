@@ -2,6 +2,7 @@ import "./globals.css";
 import React from "react";
 import { Urbanist, Inter } from "next/font/google";
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 
 const titleFont = Urbanist({
     subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
                     </p>
                 </div>
                 {children}
+                <Analytics />
             </body>
         </html>
     );
