@@ -2,11 +2,11 @@ import { QueryDatabaseResponse } from "@notionhq/client/build/src/api-endpoints"
 import { Client } from "@notionhq/client";
 import { parsePrompt } from "@/lib/prompt";
 
-type ImageResult = Extract<
+type QueryResult = Extract<
     QueryDatabaseResponse["results"][number],
     { properties: Record<string, unknown> }
 >;
-type PropertyValueMap = ImageResult["properties"];
+type PropertyValueMap = QueryResult["properties"];
 type PropertyValue = PropertyValueMap[string];
 type PropertyValueType = PropertyValue["type"];
 type ExtractedPropertyValue<T extends PropertyValueType> = Extract<
@@ -14,12 +14,19 @@ type ExtractedPropertyValue<T extends PropertyValueType> = Extract<
     { type: T }
 >;
 
-export type ImageDatabaseItem = ImageResult & {
+export type ImageDatabaseItem = QueryResult & {
     properties: {
         Name: ExtractedPropertyValue<"title">;
         Image: ExtractedPropertyValue<"files">;
         Prompt: ExtractedPropertyValue<"rich_text">;
         PromptShare: ExtractedPropertyValue<"checkbox">;
+        Collections: ExtractedPropertyValue<"relation">;
+    };
+};
+
+export type ImageCollectionDatabaseItem = QueryResult & {
+    properties: {
+        Name: ExtractedPropertyValue<"title">;
     };
 };
 
@@ -78,5 +85,56 @@ export const getImageInfos = (properties: ImageDatabaseItem["properties"]) => {
             properties.Name.title.find((t) => t.plain_text)?.plain_text ?? "",
         prompt: parsePrompt(promptRaw?.plain_text ?? ""),
         share: properties.PromptShare.checkbox as boolean,
+        collectionIds: (
+            properties.Collections.relation as { id: string }[]
+        ).flatMap((i) => i?.id),
+    };
+};
+
+export const getCollections = async (
+    ids: string[]
+): Promise<ImageCollectionDatabaseItem[]> => {
+    const client = new Client({ auth: process.env.NOTION_TOKEN });
+    const db = await client.databases.query({
+        database_id: process.env.NOTION_COLLECTIONS_DATABASE ?? "",
+    });
+
+    return db.results.filter((item) =>
+        ids.includes(item.id)
+    ) as ImageCollectionDatabaseItem[];
+};
+
+export const getCollection = async (id: string) => {
+    const client = new Client({ auth: process.env.NOTION_TOKEN });
+    const page = await client.pages.retrieve({ page_id: id });
+    return page as ImageCollectionDatabaseItem;
+};
+
+export const getCollectionInfos = (
+    properties: ImageCollectionDatabaseItem["properties"]
+) => {
+    const title = properties.Name.title.find((t) => t.plain_text)?.plain_text;
+
+    if (!title) return;
+
+    return {
+        title,
+    };
+};
+
+export const getCollectionImages = async (id: string) => {
+    const client = new Client({ auth: process.env.NOTION_TOKEN });
+    const pages = await client.databases.query({
+        database_id: process.env.NOTION_IMAGES_DATABASE ?? "",
+        filter: {
+            property: "Collections",
+            relation: {
+                contains: id,
+            },
+        },
+    });
+    return {
+        images: pages.results as ImageDatabaseItem[],
+        more: pages.has_more,
     };
 };

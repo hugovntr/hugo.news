@@ -9,6 +9,7 @@ import { Metadata } from "next";
 import { createHmac } from "node:crypto";
 import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
+import { ImageCollections } from "@/components/collections.server";
 
 interface PageProps {
     params: {
@@ -63,7 +64,7 @@ export default async function Page({ params }: PageProps) {
     const { properties } = await getImage(params.id);
     const infos = getImageInfos(properties);
     if (!infos) return null;
-    const { prompt, share, title, url } = infos;
+    const { prompt, share, title, url, collectionIds } = infos;
 
     const isPortrait = prompt.width < prompt.height;
     const aspectRatio = prompt.aspectRatio.split(":").join("/");
@@ -104,10 +105,11 @@ export default async function Page({ params }: PageProps) {
                         />
                     </figure>
                     <div>
-                        <div className="sticky top-8 flex flex-col">
+                        <div className="sticky top-8 flex max-w-sm flex-col gap-4">
                             <h1 className="mb-2 font-title text-3xl font-semibold">
                                 {title}
                             </h1>
+                            <ImageCollections ids={collectionIds} />
                             {share && <PromptPopoverContent {...prompt} />}
                             <Copyright className="mt-8" />
                         </div>
