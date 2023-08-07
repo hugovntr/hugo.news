@@ -1,5 +1,3 @@
-import { withContentlayer } from "next-contentlayer";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -11,6 +9,13 @@ const nextConfig = {
             { protocol: "https", hostname: "**.midjourney.com" },
             { protocol: "https", hostname: "**.amazonaws.com" },
         ]
-    }
+    },
+    modularizeImports: {
+        'lucide-react': {
+            transform: 'lucide-react/{{member}}',
+            skipDefaultConversion: true,
+            preventFullImport: true,
+        },
+    },
 };
 export default nextConfig

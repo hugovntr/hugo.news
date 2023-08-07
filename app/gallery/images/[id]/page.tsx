@@ -6,6 +6,9 @@ import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
+import { createHmac } from "node:crypto";
+import { notFound } from "next/navigation";
+import type { OGPayload } from "@/app/api/og/route";
 
 interface PageProps {
     params: {
@@ -13,16 +16,45 @@ interface PageProps {
     };
 }
 
+function getToken(data: string): string {
+    const hmac = createHmac("sha256", process.env.ENCRYPT_KEY ?? "");
+    hmac.update(data);
+    return hmac.digest("hex");
+}
+
+export const revalidate = 120;
+
 export async function generateMetadata({
     params,
 }: PageProps): Promise<Metadata> {
-    const { properties } = await getImage(params.id);
+    const { properties, id } = await getImage(params.id);
     const infos = getImageInfos(properties);
+    if (!infos) notFound();
+
+    const payload: OGPayload = {
+        title: infos.title,
+        url: infos.url,
+        withPrompt: infos.share,
+    };
+
+    const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
+
+    const token = getToken(base64data);
+
     return {
         title: `${infos?.title} | Hugo Ventura.`,
         authors: {
             url: "https://hugo.news",
             name: "Hugo Ventura",
+        },
+        openGraph: {
+            images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
+            url: `/gallery/images/${id}`,
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `${infos?.title} | Hugo Ventura.`,
+            images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
         },
     };
 }
@@ -34,6 +66,7 @@ export default async function Page({ params }: PageProps) {
     const { prompt, share, title, url } = infos;
 
     const isPortrait = prompt.width < prompt.height;
+    const aspectRatio = prompt.aspectRatio.split(":").join("/");
 
     return (
         <div>
@@ -52,20 +85,22 @@ export default async function Page({ params }: PageProps) {
                         "lg:flex-row lg:justify-between": isPortrait,
                     })}
                 >
-                    <figure className="relative overflow-hidden rounded-3xl bg-muted/80 p-2 dark:bg-muted/50">
+                    <figure
+                        className="relative flex max-h-screen overflow-hidden rounded-3xl bg-muted/80 p-2 dark:bg-muted/50"
+                        style={{
+                            aspectRatio,
+                            height: prompt.height,
+                            width: "auto",
+                        }}
+                    >
                         <Image
                             src={url}
                             alt={title}
                             height={prompt.height}
                             width={prompt.width}
-                            className="relative max-h-screen w-auto rounded-2xl bg-muted"
+                            className="relative max-h-screen w-auto rounded-2xl bg-muted object-cover"
                             placeholder="empty"
-                            style={{
-                                aspectRatio: prompt.aspectRatio
-                                    .split(":")
-                                    .join("/"),
-                            }}
-                            unoptimized
+                            style={{ aspectRatio }}
                         />
                     </figure>
                     <div>

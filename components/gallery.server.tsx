@@ -46,7 +46,7 @@ const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
                         alt={title}
                         height={prompt.height}
                         width={prompt.width}
-                        unoptimized
+                        loading="lazy"
                     />
                 </Link>
                 <div className="absolute bottom-0 left-0 flex items-end rounded-md">

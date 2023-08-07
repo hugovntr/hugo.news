@@ -10,6 +10,8 @@ interface PageProps {
     };
 }
 
+export const revalidate = 120;
+
 export default async function Page({ params }: PageProps) {
     const { properties } = await getImage(params.id);
     const infos = getImageInfos(properties);
@@ -29,7 +31,6 @@ export default async function Page({ params }: PageProps) {
                         alt={title}
                         height={prompt.height}
                         width={prompt.width}
-                        unoptimized
                     />
                 </div>
                 <div className="hidden w-full max-w-xs border-l border-border p-4 pt-12 lg:flex lg:flex-col">
