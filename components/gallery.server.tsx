@@ -4,6 +4,13 @@ import { PromptPopover } from "@/app/prompt.client";
 import { Masonry } from "@/components/masonry";
 import Link from "next/link";
 import Image from "next/image";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const masonryProps = {
+    className: "flex gap-4",
+    columnClassName: "flex flex-col gap-4",
+    breakpointCols: { default: 4, 1100: 3, 700: 2, 500: 1 },
+};
 
 export const ImageGallery: FC<{ images: ImageDatabaseItem[] }> = (props) => {
     const { images } = props;
@@ -24,6 +31,31 @@ export const ImageGallery: FC<{ images: ImageDatabaseItem[] }> = (props) => {
         </Masonry>
     );
 };
+
+export const ImageGalleryFallback: FC = () => (
+    <Masonry {...masonryProps}>
+        {[
+            2 / 3,
+            2 / 3,
+            4 / 3,
+            16 / 9,
+            2 / 3,
+            2 / 3,
+            2 / 3,
+            2 / 3,
+            16 / 9,
+            4 / 3,
+            2 / 3,
+            2 / 3,
+        ].map((ar) => (
+            <Skeleton
+                style={{ aspectRatio: ar }}
+                className="rounded-lg"
+                key={ar}
+            />
+        ))}
+    </Masonry>
+);
 
 const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
     const { properties } = props;

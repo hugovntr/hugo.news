@@ -6,13 +6,15 @@ import { ArrowUpRight, Github, Twitter } from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme";
 import Me from "./me.jpeg";
 import { getImages } from "@/lib/images";
-import { ImageGallery } from "@/components/gallery.server";
+import {
+    ImageGallery,
+    ImageGalleryFallback,
+} from "@/components/gallery.server";
+import { FC, Suspense } from "react";
 
 export const revalidate = 120;
 
 const Page: NextPage = async () => {
-    const data = await getImages({ page_size: 13 });
-
     return (
         <>
             <div className="container max-w-xl py-24">
@@ -46,18 +48,30 @@ const Page: NextPage = async () => {
                 </div>
             </div>
             <div className="container">
-                <ImageGallery images={data.images} />
-                {data.more && (
-                    <div className="mb-16 mt-8 flex justify-center">
-                        <Button asChild variant="ghost">
-                            <Link href="/gallery/">
-                                <span>View more</span>
-                                <ArrowUpRight className="ml-2 h-4 w-4" />
-                            </Link>
-                        </Button>
-                    </div>
-                )}
+                <Suspense fallback={<ImageGalleryFallback />}>
+                    <Gallery />
+                </Suspense>
             </div>
+        </>
+    );
+};
+
+const Gallery: FC = async () => {
+    const data = await getImages({ page_size: 25 });
+
+    return (
+        <>
+            <ImageGallery images={data.images} />
+            {data.more && (
+                <div className="mb-16 mt-8 flex justify-center">
+                    <Button asChild variant="ghost">
+                        <Link href="/gallery/">
+                            <span>View more</span>
+                            <ArrowUpRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </div>
+            )}
         </>
     );
 };

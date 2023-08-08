@@ -16,9 +16,12 @@ import { createHmac } from "node:crypto";
 import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
 import { ImageCollections } from "@/components/collections.server";
-import { ImageGallery } from "@/components/gallery.server";
+import {
+    ImageGallery,
+    ImageGalleryFallback,
+} from "@/components/gallery.server";
 import { Block, getBlocks } from "@/lib/content";
-import { FC } from "react";
+import { FC, Suspense } from "react";
 import { RenderTexts } from "@/components/text.server";
 
 interface PageProps {
@@ -33,7 +36,6 @@ export default async function Page({ params }: PageProps) {
     if (!infos) notFound();
 
     const { title } = infos;
-    const { images } = await getCollectionImages(params.id);
     const blocks = await getBlocks(params.id);
 
     return (
@@ -56,11 +58,18 @@ export default async function Page({ params }: PageProps) {
                 ))}
             </div>
             <div className="container">
-                <ImageGallery images={images} />
+                <Suspense fallback={<ImageGalleryFallback />}>
+                    <Gallery id={params.id} />
+                </Suspense>
             </div>
         </div>
     );
 }
+
+const Gallery: FC<{ id: string }> = async ({ id }) => {
+    const { images } = await getCollectionImages(id);
+    return <ImageGallery images={images} />;
+};
 
 const RenderBlock: FC<Block> = (block) => {
     const { type } = block;
