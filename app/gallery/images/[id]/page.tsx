@@ -82,16 +82,15 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div className="container">
                 <div
-                    className={cn("flex flex-1 flex-col gap-4", {
-                        "lg:flex-row lg:justify-between": isPortrait,
+                    className={cn("flex flex-1 flex-col items-center gap-4", {
+                        "lg:flex-row lg:items-start lg:justify-between":
+                            isPortrait,
                     })}
                 >
                     <figure
-                        className="relative flex max-h-screen overflow-hidden rounded-3xl bg-muted/80 p-2 dark:bg-muted/50"
+                        className="relative flex overflow-hidden rounded-3xl bg-muted/80 p-2 dark:bg-muted/50 lg:max-h-screen"
                         style={{
                             aspectRatio,
-                            height: prompt.height,
-                            width: "auto",
                         }}
                     >
                         <Image
@@ -99,7 +98,7 @@ export default async function Page({ params }: PageProps) {
                             alt={title}
                             height={prompt.height}
                             width={prompt.width}
-                            className="relative max-h-screen w-auto rounded-2xl bg-muted object-cover"
+                            className="relative w-auto rounded-2xl bg-muted object-cover"
                             placeholder="empty"
                             style={{ aspectRatio }}
                         />

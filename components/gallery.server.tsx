@@ -65,24 +65,26 @@ const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
 
     return (
         <div>
-            <div className="relative flex overflow-hidden rounded-lg bg-muted/80 p-2 dark:bg-muted/50">
+            <div className="relative flex flex-col overflow-hidden rounded-lg bg-muted/80 p-2 dark:bg-muted/50">
                 <Link
                     href={`/gallery/images/${props.id}`}
-                    className="max-h-screen"
+                    className="h-full w-full"
                     style={{
                         aspectRatio: prompt.aspectRatio.split(":").join("/"),
                     }}
                 >
                     <Image
+                        className="h-full w-full rounded-md"
                         src={url}
                         alt={title}
-                        height={prompt.height}
-                        width={prompt.width}
+                        height={prompt.height / 3}
+                        width={prompt.width / 3}
                         loading="lazy"
+                        quality={60}
                     />
                 </Link>
-                <div className="absolute bottom-0 left-0 flex items-end rounded-md">
-                    <p className="-ml-1 inline-flex rounded-tr-lg bg-muted px-4 py-1 font-title text-sm font-semibold tracking-wide">
+                <div className="flex items-end rounded-md md:absolute md:bottom-0 md:left-0">
+                    <p className="-mb-2 inline-flex rounded-tr-lg bg-muted py-1 font-title text-sm tracking-wide md:-ml-1 md:mb-0 md:px-4">
                         {title}
                     </p>
                 </div>
