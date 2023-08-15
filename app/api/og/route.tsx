@@ -134,7 +134,7 @@ export async function GET(req: Request) {
                     <h1
                         style={{
                             fontFamily: "Cabinet",
-                            fontSize: 80,
+                            fontSize: 88,
                             fontWeight: 900,
                             width: "100%",
                             height: "auto",
@@ -178,7 +178,7 @@ export async function GET(req: Request) {
                         display: "flex",
                         height: "100%",
                         width: "40%",
-                        backgroundColor: "#e5e5e5",
+                        backgroundColor: "#f5f5f5",
                     }}
                 >
                     <img
@@ -186,7 +186,7 @@ export async function GET(req: Request) {
                         width="100%"
                         style={{
                             objectFit: "cover",
-                            transform: "translateX(12px)",
+                            transform: "translateX(24px)",
                             transformOrigin: "top left",
                         }}
                         alt={payload.title}
