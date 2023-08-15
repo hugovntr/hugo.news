@@ -33,11 +33,9 @@ export const PromptPopover: FC<Prompt> = (prompt) => {
     return (
         <Popover>
             <PopoverTrigger asChild={true}>
-                <Button
-                    size="icon"
-                    className="h-8 w-8 rounded bg-black/30 text-brand-400 backdrop-blur hover:bg-brand-500 hover:text-brand-50"
-                >
-                    <Info className="h-5 w-5" />
+                <Button size="badge" variant="secondary" className="rounded-md">
+                    <Info className="mr-2 h-4 w-4" />
+                    Prompt
                 </Button>
             </PopoverTrigger>
             <PopoverContent side={"bottom"} align={"end"} sideOffset={16}>

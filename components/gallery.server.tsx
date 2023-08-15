@@ -65,16 +65,16 @@ const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
 
     return (
         <div>
-            <div className="relative flex flex-col overflow-hidden rounded-lg bg-muted/80 p-2 dark:bg-muted/50">
+            <div className="relative flex flex-col overflow-hidden rounded-lg shadow-xl shadow-neutral-200 dark:border dark:shadow-none lg:dark:border-none">
                 <Link
                     href={`/gallery/images/${props.id}`}
-                    className="h-full w-full"
+                    className="h-full"
                     style={{
                         aspectRatio: prompt.aspectRatio.split(":").join("/"),
                     }}
                 >
                     <Image
-                        className="h-full w-full rounded-md"
+                        className="h-full w-full rounded-t-md lg:rounded-md"
                         src={url}
                         alt={title}
                         height={prompt.height / 3}
@@ -83,12 +83,15 @@ const ImageWrapper: FC<ImageDatabaseItem> = (props) => {
                         quality={60}
                     />
                 </Link>
-                <div className="flex items-end rounded-md md:absolute md:bottom-0 md:left-0">
-                    <p className="-mb-2 inline-flex rounded-tr-lg bg-muted py-1 font-title text-sm tracking-wide md:-ml-1 md:mb-0 md:px-4">
-                        {title}
-                    </p>
+                <div className="inset-x-0 bottom-0 flex flex-col items-start bg-background px-4 py-2 text-popover-foreground backdrop-blur backdrop-saturate-150 lg:absolute lg:bg-neutral-950/40 lg:text-white">
+                    <p className="font-title font-semibold">{title}</p>
                 </div>
-                <div className="absolute right-4 top-4">
+                {/*<div className="flex items-end rounded-md md:absolute md:bottom-0 md:left-0">*/}
+                {/*    <p className="-mb-2 inline-flex rounded-tr-lg bg-muted py-1 font-title text-sm tracking-wide md:-ml-1 md:mb-0 md:px-4">*/}
+                {/*        {title}*/}
+                {/*    </p>*/}
+                {/*</div>*/}
+                <div className="absolute right-2 top-2">
                     {share && <PromptPopover {...prompt} />}
                 </div>
             </div>
