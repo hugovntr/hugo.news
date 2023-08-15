@@ -6,12 +6,17 @@ export interface Prompt {
     height: number;
     style?: string;
     stylize?: number;
+    version?: string;
+    weird?: number;
 }
 
 const PARAMETERS: Record<string, keyof Prompt> = {
     s: "stylize",
     style: "style",
     ar: "aspectRatio",
+    v: "version",
+    w: "weird",
+    weird: "weird",
 };
 
 const SIZES: Record<string, { width: number; height: number }> = {
