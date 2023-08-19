@@ -4,6 +4,7 @@ const nextConfig = {
         appDir: true,
     },
     images: {
+        minimumCacheTTL: 3600,
         domains: ['camo.githubusercontent.com'],
         remotePatterns: [
             { protocol: "https", hostname: "**.midjourney.com" },

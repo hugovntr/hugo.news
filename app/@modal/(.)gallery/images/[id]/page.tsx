@@ -1,4 +1,4 @@
-import { getImage, getImageInfos } from "@/lib/images";
+import { getImage, getImageInfos, getImages } from "@/lib/images";
 import Image from "next/image";
 import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
@@ -16,6 +16,14 @@ interface PageProps {
 }
 
 export const revalidate = 120;
+
+export async function generateStaticParams() {
+    const { images } = await getImages();
+    return images.reduce(
+        (acc, cur) => [...acc, { id: cur.id }],
+        [] as { id: string }[]
+    );
+}
 
 export default async function Page({ params }: PageProps) {
     return (

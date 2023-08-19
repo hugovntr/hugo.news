@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import Me from "@/app/me.jpeg";
-import { getImage, getImageInfos } from "@/lib/images";
+import { getImage, getImageInfos, getImages } from "@/lib/images";
 import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
 import { cn } from "@/lib/utils";
@@ -21,6 +21,14 @@ function getToken(data: string): string {
     const hmac = createHmac("sha256", process.env.ENCRYPT_KEY ?? "");
     hmac.update(data);
     return hmac.digest("hex");
+}
+
+export async function generateStaticParams() {
+    const { images } = await getImages();
+    return images.reduce(
+        (acc, cur) => [...acc, { id: cur.id }],
+        [] as { id: string }[]
+    );
 }
 
 export const revalidate = 120;

@@ -42,7 +42,7 @@ export const getImages = async (
 }> => {
     const client = new Client({ auth: process.env.NOTION_TOKEN });
     const opts: Required<GetImagesOptions> = {
-        page_size: 3,
+        page_size: 12,
         ...options,
     };
     const db = await client.databases.query({
