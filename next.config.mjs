@@ -9,6 +9,7 @@ const nextConfig = {
         remotePatterns: [
             { protocol: "https", hostname: "**.midjourney.com" },
             { protocol: "https", hostname: "**.amazonaws.com" },
+            { protocol: "https", hostname: "**.discordapp.com" },
         ]
     },
     modularizeImports: {
