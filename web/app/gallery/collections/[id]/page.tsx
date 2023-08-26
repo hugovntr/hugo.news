@@ -7,10 +7,14 @@ import {
     ImageGallery,
     ImageGalleryFallback,
 } from "@/components/gallery.server";
-import { Block, getBlocks } from "@/lib/content";
 import { FC, Suspense } from "react";
 import { RenderTexts } from "@/components/text.server";
-import { fetchCollection, fetchCollectionImages } from "@hugo/notion";
+import {
+    fetchBlocks,
+    fetchCollection,
+    fetchCollectionImages,
+    Block,
+} from "@hugo/notion";
 
 interface PageProps {
     params: {
@@ -24,7 +28,7 @@ export default async function Page({ params }: PageProps) {
     if (!infos) notFound();
 
     const { title } = infos;
-    const blocks = await getBlocks(params.id);
+    const blocks = await fetchBlocks(params.id);
 
     return (
         <div>

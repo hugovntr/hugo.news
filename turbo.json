@@ -3,6 +3,9 @@
   "pipeline": {
     "dev": {
       "cache": false
+    },
+    "build": {
+      "outputs": ["web/.next/**", "!web/.next/cache/**", "discord/dist/**"]
     }
   }
 }

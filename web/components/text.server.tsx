@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { RichText } from "@/lib/content";
+import { RichText } from "@hugo/notion";
 
 export const RenderTexts: FC<{ elements: RichText[] }> = ({ elements }) => {
     return (
