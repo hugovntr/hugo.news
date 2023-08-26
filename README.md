@@ -47,7 +47,7 @@ Next, you should create a new page on notion and add **2 inline databases** to i
 | Name          | Title                 |
 | Images        | ↗︎Relation[^relation] |
 
-[^relation] This relation should be automatically created when you create the _Collections_ relation in the **Images Database Schema**
+[^relation]: This relation should be automatically created when you create the _Collections_ relation in the **Images Database Schema**
 
 Once you have created these databases, you need to get their unique ID and add them into your `.env.local`.
 
