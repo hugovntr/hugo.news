@@ -1,0 +1,25 @@
+{
+  "name": "discord",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "tsup src/** --watch --onSuccess \"node dist/index.js\"",
+    "build": "tsup src/** --minify",
+    "start": "node dist/index.js"
+  },
+  "author": {
+    "name": "Hugo Ventura",
+    "url": "https://x.com/hugovntr"
+  },
+  "tsup": {
+    "external": ["discord.js"]
+  },
+  "keywords": [],
+  "license": "ISC",
+  "devDependencies": {
+    "@hugo/notion": "workspace:^",
+    "discord.js": "^14.13.0",
+    "dotenv": "^16.3.1",
+    "tsup": "^7.2.0"
+  }
+}
