@@ -90,13 +90,6 @@ register()
                     | Command<ContextMenuCommandBuilder>
                     | undefined;
 
-                console.log(
-                    commands.map(
-                        (i) => i.command instanceof ContextMenuCommandBuilder
-                    ),
-                    command,
-                    interaction.commandName
-                );
                 await command?.handler(interaction);
                 return;
             }
