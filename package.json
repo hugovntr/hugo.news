@@ -1,0 +1,19 @@
+{
+  "name": "hugo.news",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Monorepo for https://hugo.news",
+  "author": {
+    "name": "Hugo Ventura",
+    "url": "https://x.com/hugovntr"
+  },
+  "license": "ISC",
+  "scripts": {
+    "dev": "turbo run dev --filter web"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.1",
+    "prettier-plugin-tailwindcss": "^0.5.2",
+    "turbo": "^1.10.13"
+  }
+}

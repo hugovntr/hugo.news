@@ -1,15 +1,15 @@
 import { FC } from "react";
-import {
-    getCollectionInfos,
-    getCollections,
-    ImageCollectionDatabaseItem,
-} from "@/lib/images";
+import { getCollectionInfos } from "@/lib/images";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import {
+    fetchCollections,
+    NotionImageCollectionDatabaseItem,
+} from "@hugo/notion";
 
 export const ImageCollections: FC<{ ids: string[] }> = async (props) => {
     const { ids } = props;
-    const collections = await getCollections(ids);
+    const collections = await fetchCollections(ids);
     if (collections.length === 0) return null;
     return (
         <div className="flex flex-wrap gap-2">
@@ -20,7 +20,7 @@ export const ImageCollections: FC<{ ids: string[] }> = async (props) => {
     );
 };
 
-const CollectionItem: FC<ImageCollectionDatabaseItem> = (props) => {
+const CollectionItem: FC<NotionImageCollectionDatabaseItem> = (props) => {
     const { properties } = props;
     const infos = getCollectionInfos(properties);
     if (!infos) return;

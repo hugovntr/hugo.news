@@ -2,6 +2,7 @@
 const nextConfig = {
     experimental: {
         appDir: true,
+        externalDir: true
     },
     images: {
         minimumCacheTTL: 3600,
