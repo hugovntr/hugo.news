@@ -1,4 +1,4 @@
-# Title
+# [hugo.news](https://hugo.news)
 
 ## Packages
 
