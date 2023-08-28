@@ -9,7 +9,7 @@ import { Metadata } from "next";
 import { createHmac } from "node:crypto";
 import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
-import { ImageCollections } from "@/components/collections.server";
+import { CollectionsBadges } from "@/components/collections.server";
 import { fetchImage, fetchImages } from "@hugo/notion";
 
 interface PageProps {
@@ -117,7 +117,7 @@ export default async function Page({ params }: PageProps) {
                             <h1 className="font-title mb-2 text-3xl font-semibold">
                                 {title}
                             </h1>
-                            <ImageCollections ids={collectionIds} />
+                            <CollectionsBadges ids={collectionIds} />
                             {share && <PromptPopoverContent {...prompt} />}
                             <Copyright className="mt-8" />
                         </div>

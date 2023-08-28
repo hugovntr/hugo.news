@@ -3,7 +3,7 @@ import Image from "next/image";
 import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
 import { Dialog, DialogContent } from "./modal";
-import { ImageCollections } from "@/components/collections.server";
+import { CollectionsBadges } from "@/components/collections.server";
 import { FC, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -87,7 +87,7 @@ const Data: FC<{ id: string }> = async ({ id }) => {
             />
             <div className="border-border flex w-full flex-shrink-0 flex-col gap-4 p-4 md:max-w-xs md:border-l md:pt-12">
                 <p className="font-title mb-2 text-lg font-semibold">{title}</p>
-                <ImageCollections ids={collectionIds} />
+                <CollectionsBadges ids={collectionIds} />
                 {share && <PromptPopoverContent {...prompt} />}
                 <Copyright className="mt-auto" />
             </div>

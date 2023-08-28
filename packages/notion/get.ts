@@ -3,10 +3,10 @@ import {
     NotionImageCollectionDatabaseItem,
     NotionImageDatabaseItem,
 } from "./types";
+import type { QueryDatabaseParameters } from "@notionhq/client/build/src/api-endpoints";
 
-interface GetImagesOptions {
-    page_size?: number;
-}
+interface GetImagesOptions
+    extends Omit<QueryDatabaseParameters, "database_id"> {}
 
 export const fetchImages = async (
     options?: GetImagesOptions
@@ -15,7 +15,7 @@ export const fetchImages = async (
     more: boolean;
 }> => {
     const client = new Client({ auth: process.env.NOTION_TOKEN });
-    const opts: Required<GetImagesOptions> = {
+    const opts: GetImagesOptions = {
         page_size: 12,
         ...options,
     };
@@ -71,6 +71,22 @@ export const fetchCollectionImages = async (id: string) => {
         images: pages.results as NotionImageDatabaseItem[],
         more: pages.has_more,
     };
+};
+
+export const fetchCollectionsLatestImages = async (ids: string[]) => {
+    const client = new Client({ auth: process.env.NOTION_TOKEN });
+    const pages = await client.databases.query({
+        database_id: process.env.NOTION_IMAGES_DATABASE ?? "",
+        filter: {
+            or: ids.map((id) => ({
+                property: "Collections",
+                relation: { contains: id },
+            })),
+        },
+        page_size: 2,
+    });
+
+    return pages.results as NotionImageDatabaseItem[];
 };
 
 export type RichText = {

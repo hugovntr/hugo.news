@@ -36,6 +36,7 @@ export const getImageInfos = (
         collectionIds: (
             properties.Collections.relation as { id: string }[]
         ).flatMap((i) => i?.id),
+        createdAt: new Date(properties.CreatedAt.created_time as string),
     };
 };
 
@@ -43,10 +44,15 @@ export const getCollectionInfos = (
     properties: NotionImageCollectionDatabaseItem["properties"]
 ) => {
     const title = properties.Name.title.find((t) => t.plain_text)?.plain_text;
+    const imagesIds = (properties.Images.relation as { id: string }[]).reduce(
+        (acc, cur) => [...acc, cur?.id],
+        [] as string[]
+    );
 
-    if (!title) return;
+    if (!title || !imagesIds) return;
 
     return {
         title,
+        imagesIds,
     };
 };

@@ -19,11 +19,13 @@ export type NotionImageDatabaseItem = QueryResult & {
         Prompt: ExtractedPropertyValue<"rich_text">;
         PromptShare: ExtractedPropertyValue<"checkbox">;
         Collections: ExtractedPropertyValue<"relation">;
+        CreatedAt: ExtractedPropertyValue<"created_time">;
     };
 };
 
 export type NotionImageCollectionDatabaseItem = QueryResult & {
     properties: {
         Name: ExtractedPropertyValue<"title">;
+        Images: ExtractedPropertyValue<"relation">;
     };
 };
