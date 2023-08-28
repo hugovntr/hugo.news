@@ -68,23 +68,26 @@ const Data: FC<{ id: string }> = async ({ id }) => {
                     !isPortrait,
             })}
         >
-            <Image
-                className={cn("", {
-                    "w-max md:h-full md:max-h-screen md:w-full md:flex-shrink":
-                        isPortrait,
-                    "md:max-w-auto h-full max-w-[100vw] flex-1 md:w-full":
-                        !isPortrait,
-                })}
-                style={{
-                    aspectRatio: prompt.aspectRatio.split(":").join("/"),
-                }}
-                loading="eager"
-                src={url}
-                alt={title}
-                height={prompt.height}
-                width={prompt.width}
-                quality={100}
-            />
+            <Suspense>
+                <Image
+                    className={cn("bg-muted", {
+                        "w-max md:h-full md:max-h-screen md:w-full md:flex-shrink":
+                            isPortrait,
+                        "md:max-w-auto h-full max-w-[100vw] flex-1 md:w-full":
+                            !isPortrait,
+                    })}
+                    style={{
+                        aspectRatio: prompt.aspectRatio.split(":").join("/"),
+                    }}
+                    src={url}
+                    alt={title}
+                    height={prompt.height}
+                    width={prompt.width}
+                    placeholder="empty"
+                    quality={100}
+                    fetchPriority="high"
+                />
+            </Suspense>
             <div className="border-border flex w-full flex-shrink-0 flex-col gap-4 p-4 md:max-w-xs md:border-l md:pt-12">
                 <p className="font-title mb-2 text-lg font-semibold">{title}</p>
                 <CollectionsBadges ids={collectionIds} />
