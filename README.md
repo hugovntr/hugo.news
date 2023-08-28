@@ -42,10 +42,11 @@ Next, you should create a new page on notion and add **2 inline databases** to i
 
 **Collections Database Schema**
 
-| Property Name | Type                  |
-|---------------|-----------------------|
-| Name          | Title                 |
-| Images        | ↗︎Relation[^relation] |
+| Property Name | Type                                      |
+|---------------|-------------------------------------------|
+| Name          | Title                                     |
+| Images        | ↗︎Relation[^relation]                     |
+| UpdatedAt     | Rollup > Images > CreatedAt > Latest date |
 
 [^relation]: This relation should be automatically created when you create the _Collections_ relation in the **Images Database Schema**
 

@@ -21,6 +21,7 @@ export const fetchImages = async (
     };
     const db = await client.databases.query({
         database_id: process.env.NOTION_IMAGES_DATABASE ?? "",
+        sorts: [{ property: "CreatedAt", direction: "descending" }],
         ...opts,
     });
     return {
@@ -41,6 +42,7 @@ export const fetchCollections = async (
     const client = new Client({ auth: process.env.NOTION_TOKEN });
     const db = await client.databases.query({
         database_id: process.env.NOTION_COLLECTIONS_DATABASE ?? "",
+        sorts: [{ property: "UpdatedAt", direction: "descending" }],
     });
 
     return ids
@@ -66,27 +68,12 @@ export const fetchCollectionImages = async (id: string) => {
                 contains: id,
             },
         },
+        sorts: [{ property: "CreatedAt", direction: "descending" }],
     });
     return {
         images: pages.results as NotionImageDatabaseItem[],
         more: pages.has_more,
     };
-};
-
-export const fetchCollectionsLatestImages = async (ids: string[]) => {
-    const client = new Client({ auth: process.env.NOTION_TOKEN });
-    const pages = await client.databases.query({
-        database_id: process.env.NOTION_IMAGES_DATABASE ?? "",
-        filter: {
-            or: ids.map((id) => ({
-                property: "Collections",
-                relation: { contains: id },
-            })),
-        },
-        page_size: 2,
-    });
-
-    return pages.results as NotionImageDatabaseItem[];
 };
 
 export type RichText = {
