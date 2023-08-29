@@ -11,6 +11,7 @@ import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
 import { CollectionsBadges } from "@/components/collections.server";
 import { fetchImage, fetchImages } from "@hugo/notion";
+import { Suspense } from "react";
 
 interface PageProps {
     params: {
@@ -80,7 +81,7 @@ export default async function Page({ params }: PageProps) {
 
     return (
         <div>
-            <div className="container my-4">
+            <div className="container my-8">
                 <Link href="/">
                     <Image
                         src={Me}
@@ -91,27 +92,22 @@ export default async function Page({ params }: PageProps) {
             </div>
             <div className="container">
                 <div
-                    className={cn("flex flex-1 flex-col items-center gap-4", {
-                        "lg:flex-row lg:items-start lg:justify-between":
+                    className={cn("flex flex-1 flex-col items-center gap-16", {
+                        "lg:flex-row lg:items-start lg:justify-center":
                             isPortrait,
                     })}
                 >
-                    <figure
-                        className="bg-muted/80 dark:bg-muted/50 relative flex overflow-hidden rounded-3xl p-2 lg:max-h-screen"
-                        style={{
-                            aspectRatio,
-                        }}
-                    >
+                    <Suspense>
                         <Image
                             src={url}
                             alt={title}
                             height={prompt.height}
                             width={prompt.width}
-                            className="bg-muted relative w-auto rounded-2xl object-cover"
+                            className="bg-muted relative max-h-screen w-auto rounded-2xl object-cover"
                             placeholder="empty"
                             style={{ aspectRatio }}
                         />
-                    </figure>
+                    </Suspense>
                     <div>
                         <div className="sticky top-8 flex max-w-sm flex-col gap-4">
                             <h1 className="font-title mb-2 text-3xl font-semibold">
