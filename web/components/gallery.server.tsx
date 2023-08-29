@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { NotionImageDatabaseItem } from "@hugo/notion";
+import { CollectionsBadges } from "@/components/collections.server";
 
 const masonryProps = {
     className: "flex gap-4",
@@ -55,7 +56,7 @@ const ImageWrapper: FC<NotionImageDatabaseItem> = (props) => {
     const { properties } = props;
     const infos = getImageInfos(properties);
     if (!infos) return null;
-    const { prompt, share, title, url } = infos;
+    const { prompt, share, title, url, collectionIds } = infos;
 
     return (
         <div>
@@ -80,11 +81,20 @@ const ImageWrapper: FC<NotionImageDatabaseItem> = (props) => {
                         />
                     </Suspense>
                 </Link>
-                <div className="bg-background text-popover-foreground inset-x-0 bottom-0 flex flex-col items-start px-4 py-2 backdrop-blur backdrop-saturate-150 lg:absolute lg:bg-neutral-950/40 lg:text-white">
-                    <p className="font-title font-semibold">{title}</p>
+                <div className="bg-background text-popover-foreground inset-x-0 bottom-0 flex flex-col items-start px-4 py-3 backdrop-blur backdrop-saturate-150 lg:absolute lg:bg-neutral-950/10 lg:text-white">
+                    <p className="font-title line-clamp-1 text-sm font-semibold">
+                        {title}
+                    </p>
                 </div>
-                <div className="absolute right-2 top-2">
+                <div className="absolute right-2 top-2 flex">
                     {share && <PromptPopover {...prompt} />}
+                </div>
+                <div className="absolute bottom-2 right-2 lg:bottom-14">
+                    <CollectionsBadges
+                        ids={collectionIds}
+                        className="flex-col items-end"
+                        variant="backdrop"
+                    />
                 </div>
             </div>
         </div>

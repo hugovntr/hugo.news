@@ -1,7 +1,7 @@
 import { cache, FC, Suspense } from "react";
 import { getCollectionInfos, getImageInfos } from "@/lib/images";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button, ButtonProps } from "@/components/ui/button";
 import {
     fetchCollections,
     fetchImage,
@@ -13,25 +13,35 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const CollectionsBadges: FC<{ ids: string[] }> = async (props) => {
-    const { ids } = props;
+export const CollectionsBadges: FC<{
+    ids: string[];
+    className?: string;
+    variant?: ButtonProps["variant"];
+}> = async (props) => {
+    const { ids, className, variant } = props;
     const collections = await fetchCollections(ids);
     if (collections.length === 0) return null;
     return (
-        <div className="flex flex-wrap gap-2">
+        <div className={cn("flex flex-wrap gap-2", className)}>
             {collections.map((c) => (
-                <CollectionItem {...c} key={c.id} />
+                <CollectionItem
+                    {...c}
+                    key={c.id}
+                    variant={variant ?? "outline"}
+                />
             ))}
         </div>
     );
 };
 
-const CollectionItem: FC<NotionImageCollectionDatabaseItem> = (props) => {
-    const { properties } = props;
+const CollectionItem: FC<
+    NotionImageCollectionDatabaseItem & { variant: ButtonProps["variant"] }
+> = (props) => {
+    const { properties, variant } = props;
     const infos = getCollectionInfos(properties);
     if (!infos) return;
     return (
-        <Button asChild variant="outline" size="badge">
+        <Button asChild variant={variant} size="badge">
             <Link href={`/gallery/collections/${props.id}`}>
                 <p>{infos.title}</p>
             </Link>

@@ -1,14 +1,20 @@
 import "./globals.css";
 import React from "react";
-import { Urbanist, Inter } from "next/font/google";
+import { Montserrat, Inter } from "next/font/google";
 import LocalFont from "next/font/local";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme";
 import { Analytics } from "@vercel/analytics/react";
 
-const titleFont = LocalFont({
-    src: "./fonts/cabinetgrotesk/font.woff2",
+// const titleFont = LocalFont({
+//     src: "./fonts/cabinetgrotesk/font.woff2",
+//     display: "swap",
+//     variable: "--font-title",
+// });
+
+const titleFont = Montserrat({
+    subsets: ["latin"],
     display: "swap",
     variable: "--font-title",
 });

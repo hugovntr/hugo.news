@@ -9,7 +9,7 @@ import {
     PopoverTrigger,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
-import { Copy, Info } from "lucide-react";
+import { Copy, Info, TestTube2 } from "lucide-react";
 import { camelToTitle } from "@/lib/utils";
 
 export const PromptPopover: FC<Prompt> = (prompt) => {
@@ -34,7 +34,7 @@ export const PromptPopover: FC<Prompt> = (prompt) => {
         <Popover>
             <PopoverTrigger asChild={true}>
                 <Button size="badge" variant="secondary" className="rounded-md">
-                    <Info className="mr-2 h-4 w-4" />
+                    <TestTube2 className="mr-2 h-4 w-4" />
                     Prompt
                 </Button>
             </PopoverTrigger>

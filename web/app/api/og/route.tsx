@@ -20,7 +20,7 @@ function toHex(buffer: ArrayBuffer) {
 }
 
 const titleFont = fetch(
-    new URL("../../../assets/cabinet.ttf", import.meta.url)
+    new URL("../../../assets/montserrat.ttf", import.meta.url)
 ).then((r) => r.arrayBuffer());
 const textFont = fetch(
     new URL("../../../assets/inter.ttf", import.meta.url)
@@ -133,7 +133,7 @@ export async function GET(req: Request) {
                     </div>
                     <h1
                         style={{
-                            fontFamily: "Cabinet",
+                            fontFamily: "Montserrat",
                             fontSize: 88,
                             fontWeight: 900,
                             width: "100%",
@@ -141,7 +141,7 @@ export async function GET(req: Request) {
                             display: "flex",
                             flexWrap: "wrap",
                             gap: 16,
-                            lineHeight: 1,
+                            lineHeight: 0.8,
                         }}
                     >
                         {payload.title.split(" ").map((w) => (
@@ -199,7 +199,7 @@ export async function GET(req: Request) {
             height: 630,
             width: 1200,
             fonts: [
-                { name: "Cabinet", data: titleFontData, style: "normal" },
+                { name: "Montserrat", data: titleFontData, style: "normal" },
                 { name: "Inter", data: textFontData, style: "normal" },
             ],
         }
