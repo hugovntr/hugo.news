@@ -32,7 +32,7 @@ export default async function Page({ params }: PageProps) {
 
     return (
         <div>
-            <div className="container my-4">
+            <div className="container my-8">
                 <Link href="/">
                     <Image
                         src={Me}

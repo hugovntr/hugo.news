@@ -89,7 +89,7 @@ const ImageWrapper: FC<NotionImageDatabaseItem> = (props) => {
                 <div className="absolute right-2 top-2 flex">
                     {share && <PromptPopover {...prompt} />}
                 </div>
-                <div className="absolute bottom-2 right-2 lg:bottom-14">
+                <div className="absolute bottom-14 right-2">
                     <CollectionsBadges
                         ids={collectionIds}
                         className="flex-col items-end"
