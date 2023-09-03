@@ -1,17 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import Me from "@/app/me.jpeg";
 import { getImageInfos } from "@/lib/images";
 import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
 import { cn } from "@/lib/utils";
 import { Metadata } from "next";
-import { createHmac } from "node:crypto";
 import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
 import { CollectionsBadges } from "@/components/collections.server";
 import { fetchImage, fetchImages } from "@hugo/notion";
 import { Suspense } from "react";
+
+export const runtime = "edge";
 
 interface PageProps {
     params: {
@@ -19,10 +19,25 @@ interface PageProps {
     };
 }
 
-function getToken(data: string): string {
-    const hmac = createHmac("sha256", process.env.ENCRYPT_KEY ?? "");
-    hmac.update(data);
-    return hmac.digest("hex");
+async function getToken(data: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const key = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(process.env.ENCRYPT_KEY ?? ""),
+        { name: "HMAC", hash: "SHA-256" },
+        false,
+        ["sign", "verify"]
+    );
+
+    const signature = await crypto.subtle.sign(
+        "HMAC",
+        key,
+        encoder.encode(data)
+    );
+    // Convert to byte array
+    const hashArray = Array.from(new Uint8Array(signature));
+    // Convert to hex string
+    return hashArray.map((i) => i.toString(16).padStart(2, "0")).join("");
 }
 
 export async function generateStaticParams() {
@@ -50,7 +65,7 @@ export async function generateMetadata({
 
     const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
 
-    const token = getToken(base64data);
+    const token = await getToken(base64data);
 
     return {
         title: `${infos?.title} | Hugo Ventura.`,
@@ -84,7 +99,9 @@ export default async function Page({ params }: PageProps) {
             <div className="container my-8">
                 <Link href="/">
                     <Image
-                        src={Me}
+                        src={"https://avatars.githubusercontent.com/hugovntr"}
+                        height={96}
+                        width={96}
                         className="bg-muted mx-auto h-12 w-12 rounded-full object-cover"
                         alt="Hugo Ventura"
                     />

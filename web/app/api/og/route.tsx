@@ -25,9 +25,6 @@ const titleFont = fetch(
 const textFont = fetch(
     new URL("../../../assets/inter.ttf", import.meta.url)
 ).then((r) => r.arrayBuffer());
-const me = fetch(new URL("../../me.jpeg", import.meta.url)).then((r) =>
-    r.arrayBuffer()
-);
 
 export interface OGPayload {
     title: string;
@@ -56,7 +53,6 @@ export async function GET(req: Request) {
 
     const titleFontData = await titleFont;
     const textFontData = await textFont;
-    const meData: any = await me;
 
     // @ts-ignore
     return new ImageResponse(
@@ -93,7 +89,9 @@ export async function GET(req: Request) {
                         }}
                     >
                         <img
-                            src={meData}
+                            src={
+                                "https://avatars.githubusercontent.com/hugovntr"
+                            }
                             height="42"
                             width="42"
                             style={{ borderRadius: 42, objectFit: "cover" }}

@@ -1,6 +1,5 @@
 import { FC, HTMLAttributes } from "react";
 import Image from "next/image";
-import Me from "@/app/me.jpeg";
 import { cn } from "@/lib/utils";
 
 export const Copyright: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
@@ -10,7 +9,9 @@ export const Copyright: FC<HTMLAttributes<HTMLDivElement>> = (props) => {
             className={cn("inline-flex items-center gap-2", props.className)}
         >
             <Image
-                src={Me}
+                src={"https://avatars.githubusercontent.com/hugovntr"}
+                height={96}
+                width={96}
                 alt="Hugo Ventura"
                 className="h-8 w-8 rounded-full object-cover"
             />

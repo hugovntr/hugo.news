@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Me from "@/app/me.jpeg";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
@@ -9,7 +8,9 @@ export default function Loading() {
             <div className="container my-4">
                 <Link href="/">
                     <Image
-                        src={Me}
+                        src={"https://avatars.githubusercontent.com/hugovntr"}
+                        height={96}
+                        width={96}
                         className="bg-muted mx-auto h-12 w-12 rounded-full object-cover"
                         alt="Hugo Ventura"
                     />

@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "ui": "shadcn-ui"
+    "ui": "shadcn-ui",
+    "cloudflare": "pnpx @cloudflare/next-on-pages"
   },
   "dependencies": {
     "@hugo/notion": "workspace:^",

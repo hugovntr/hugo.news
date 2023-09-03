@@ -2,7 +2,6 @@ import { ImageGallery } from "@/components/gallery.server";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import Me from "@/app/me.jpeg";
 import { fetchImages } from "@hugo/notion";
 
 export const metadata: Metadata = {
@@ -18,7 +17,9 @@ export default async function Page() {
             <div className="container">
                 <Link href="/">
                     <Image
-                        src={Me}
+                        src={"https://avatars.githubusercontent.com/hugovntr"}
+                        height={96}
+                        width={96}
                         className="bg-muted mx-auto mt-4 h-12 w-12 rounded-full object-cover"
                         alt="Hugo Ventura"
                     />

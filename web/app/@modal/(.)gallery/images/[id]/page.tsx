@@ -15,6 +15,7 @@ interface PageProps {
     };
 }
 
+export const runtime = "edge";
 export const revalidate = 120;
 
 export async function generateStaticParams() {

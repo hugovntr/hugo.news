@@ -6,6 +6,9 @@
     },
     "build": {
       "outputs": ["web/.next/**", "!web/.next/cache/**", "discord/dist/**"]
+    },
+    "cloudflare": {
+      "outputs": ["web/.vercel/**"]
     }
   }
 }

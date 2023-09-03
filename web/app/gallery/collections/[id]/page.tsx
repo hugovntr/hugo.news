@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import Me from "@/app/me.jpeg";
 import { getCollectionInfos } from "@/lib/images";
 import { notFound } from "next/navigation";
 import {
@@ -22,6 +21,8 @@ interface PageProps {
     };
 }
 
+export const runtime = "edge";
+
 export default async function Page({ params }: PageProps) {
     const { properties } = await fetchCollection(params.id);
     const infos = getCollectionInfos(properties);
@@ -35,7 +36,9 @@ export default async function Page({ params }: PageProps) {
             <div className="container my-8">
                 <Link href="/">
                     <Image
-                        src={Me}
+                        src={"https://avatars.githubusercontent.com/hugovntr"}
+                        height={96}
+                        width={96}
                         className="bg-muted mx-auto h-12 w-12 rounded-full object-cover"
                         alt="Hugo Ventura"
                     />

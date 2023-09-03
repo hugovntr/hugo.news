@@ -1,24 +1,15 @@
 import type { NextPage } from "next";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
-import { ArrowUpRight, Github, Twitter } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { ThemeSwitcher } from "@/components/theme";
-import Me from "./me.jpeg";
-import {
-    fetchCollections,
-    fetchImage,
-    fetchImages,
-    NotionImageDatabaseItem,
-} from "@hugo/notion";
+import { fetchCollections, fetchImages } from "@hugo/notion";
 import {
     ImageGallery,
     ImageGalleryFallback,
 } from "@/components/gallery.server";
-import { FC, Suspense, cache } from "react";
-import { getImageInfos } from "@/lib/images";
-import { cn } from "@/lib/utils";
+import { FC, Suspense } from "react";
 import {
     ImageCollections,
     ImageCollectionsFallback,
@@ -31,7 +22,9 @@ const Page: NextPage = async () => {
         <>
             <div className="container max-w-xl py-24">
                 <Image
-                    src={Me}
+                    src={"https://avatars.githubusercontent.com/hugovntr"}
+                    height={96}
+                    width={96}
                     className="bg-muted shadow-brand-200 dark:shadow-brand-950 mb-8 h-20 w-20 rounded-full object-cover shadow-2xl"
                     alt="Hugo Ventura"
                 />
