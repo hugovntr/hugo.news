@@ -5,6 +5,7 @@ const nextConfig = {
         externalDir: true
     },
     images: {
+        formats: ["image/webp"],
         minimumCacheTTL: 3600,
         domains: ['camo.githubusercontent.com', 'avatars.githubusercontent.com'],
         remotePatterns: [
