@@ -5,8 +5,8 @@ const nextConfig = {
         externalDir: true
     },
     images: {
+        disableStaticImages: true,
         formats: ["image/webp"],
-        minimumCacheTTL: 3600,
         domains: ['camo.githubusercontent.com', 'avatars.githubusercontent.com'],
         remotePatterns: [
             { protocol: "https", hostname: "**.midjourney.com" },
