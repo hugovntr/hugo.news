@@ -6,6 +6,7 @@ const nextConfig = {
     },
     images: {
         disableStaticImages: true,
+        unoptimized: true,
         formats: ["image/webp"],
         domains: ['camo.githubusercontent.com', 'avatars.githubusercontent.com'],
         remotePatterns: [
