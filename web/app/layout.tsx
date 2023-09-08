@@ -5,7 +5,6 @@ import LocalFont from "next/font/local";
 import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/theme";
-import { Analytics } from "@vercel/analytics/react";
 
 // const titleFont = LocalFont({
 //     src: "./fonts/cabinetgrotesk/font.woff2",
@@ -68,7 +67,6 @@ export default function RootLayout(props: RootLayoutProps) {
                         </div>
                     </footer>
                     <Toaster />
-                    <Analytics />
                     {modal}
                 </ThemeProvider>
             </body>

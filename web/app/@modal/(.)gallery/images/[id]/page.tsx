@@ -2,7 +2,7 @@ import { getImageInfos } from "@/lib/images";
 import Image from "next/image";
 import { PromptPopoverContent } from "@/app/prompt.client";
 import { Copyright } from "@/components/copyright";
-import { Dialog, DialogContent } from "./modal";
+import { Modal, ModalClose } from "./modal";
 import { CollectionsBadges } from "@/components/collections.server";
 import { FC, Suspense } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -28,18 +28,63 @@ export async function generateStaticParams() {
 
 export default async function Page({ params }: PageProps) {
     return (
-        <Dialog>
-            <DialogContent className="flex h-fit max-h-screen w-fit gap-0 overflow-hidden p-0 md:max-h-[calc(100vh_-_2rem)] md:w-max md:max-w-[calc(100vw_-_2rem)]">
-                <Suspense fallback={<Fallback />}>
-                    <Data id={params.id} />
-                </Suspense>
-            </DialogContent>
-        </Dialog>
+        <Modal>
+            <Suspense fallback={<Fallback />}>
+                <Content id={params.id} />
+            </Suspense>
+        </Modal>
     );
+    // return (
+    //     <Dialog>
+    //         <DialogContent className="flex h-fit max-h-screen w-fit gap-0 overflow-hidden p-0 md:max-h-[calc(100vh_-_2rem)] md:w-max md:max-w-[calc(100vw_-_2rem)]">
+    //             <Suspense fallback={<Fallback />}>
+    //                 <Data id={params.id} />
+    //             </Suspense>
+    //         </DialogContent>
+    //     </Dialog>
+    // );
 }
 
+const Content: FC<{ id: string }> = async ({ id }) => {
+    const image = await fetchImage(id);
+    const infos = getImageInfos(image.properties);
+    if (!infos) return null;
+    const { prompt, share, title, url, collectionIds } = infos;
+
+    return (
+        <div className="bg-background border-border/60 relative flex max-h-full max-w-full flex-col overflow-auto rounded-xl border shadow-2xl md:flex-row">
+            <figure
+                className="bg-muted h-full w-full flex-shrink  md:max-h-[calc(-4rem+100vh)]"
+                style={{
+                    aspectRatio: prompt.aspectRatio.split(":").join("/"),
+                }}
+            >
+                <Image
+                    src={url}
+                    alt={title}
+                    height={prompt.height}
+                    width={prompt.width}
+                />
+            </figure>
+            <div className="border-border flex w-full flex-shrink flex-col gap-4 p-4 md:max-w-xs md:border-l">
+                <div className="mb-2 flex flex-row items-start justify-between gap-2">
+                    <p className="font-title mt-1 text-lg font-semibold">
+                        {title}
+                    </p>
+                    <ModalClose />
+                </div>
+                <div className="flex flex-shrink flex-col gap-4 md:overflow-auto">
+                    <CollectionsBadges ids={collectionIds} />
+                    {share && <PromptPopoverContent {...prompt} />}
+                </div>
+                <Copyright className="mt-auto" />
+            </div>
+        </div>
+    );
+};
+
 const Fallback: FC = () => (
-    <>
+    <div className="bg-background border-border/60 relative flex max-h-full max-w-full flex-col overflow-auto rounded-xl border shadow-2xl md:flex-row">
         <div className="overflow-hidden" style={{ aspectRatio: 2 / 3 }}>
             <Skeleton style={{ width: 896, height: 1344 }} />
         </div>
@@ -49,7 +94,7 @@ const Fallback: FC = () => (
             <Skeleton className="h-4 w-3/4" />
             <Skeleton className="mt-auto h-4 w-2/3" />
         </div>
-    </>
+    </div>
 );
 
 const Data: FC<{ id: string }> = async ({ id }) => {
