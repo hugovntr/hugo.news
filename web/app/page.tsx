@@ -15,6 +15,7 @@ import {
     ImageCollectionsFallback,
 } from "@/components/collections.server";
 
+export const runtime = "edge";
 export const revalidate = 120;
 
 const Page: NextPage = async () => {

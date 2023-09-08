@@ -57,15 +57,15 @@ export async function generateMetadata({
     const infos = getImageInfos(properties);
     if (!infos) notFound();
 
-    const payload: OGPayload = {
-        title: infos.title,
-        url: infos.url,
-        withPrompt: infos.share,
-    };
+    // const payload: OGPayload = {
+    //     title: infos.title,
+    //     url: infos.url,
+    //     withPrompt: infos.share,
+    // };
 
-    const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
-
-    const token = await getToken(base64data);
+    // const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
+    //
+    // const token = await getToken(base64data);
 
     return {
         title: `${infos?.title} | Hugo Ventura.`,
@@ -74,13 +74,13 @@ export async function generateMetadata({
             name: "Hugo Ventura",
         },
         openGraph: {
-            images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
+            // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
             url: `/gallery/images/${id}`,
         },
         twitter: {
             card: "summary_large_image",
             title: `${infos?.title} | Hugo Ventura.`,
-            images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
+            // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
         },
     };
 }
