@@ -45,13 +45,21 @@ export const Modal: FC<PropsWithChildren<{}>> = (props) => {
     };
 
     const Slot = (
-        <div className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden p-4">
+        <div className="fixed inset-0 z-50 flex items-end justify-center overflow-hidden md:items-center">
             <div
                 onClick={handleExit}
-                className="bg-background/80 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 backdrop-blur-sm"
+                className="bg-background/80 animate-in fade-in-0 fixed inset-0 backdrop-blur-sm"
             />
 
-            {children}
+            <div className="slide-in-from-bottom fade-in-0 md:slide-in-from-bottom-0 md:zoom-in-90 animate-in relative flex max-h-full max-w-full flex-col md:p-4">
+                <button
+                    className="flex h-16 w-full items-end justify-center pb-4 md:hidden"
+                    onClick={handleExit}
+                >
+                    <span className="bg-muted h-2 w-24 rounded-full" />
+                </button>
+                {children}
+            </div>
         </div>
     );
 

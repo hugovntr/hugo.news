@@ -52,7 +52,7 @@ const Content: FC<{ id: string }> = async ({ id }) => {
     const { prompt, share, title, url, collectionIds } = infos;
 
     return (
-        <div className="bg-background border-border/60 relative flex max-h-full max-w-full flex-col overflow-auto rounded-xl border shadow-2xl md:flex-row">
+        <div className="bg-background border-border/60 relative flex max-h-full max-w-full flex-col overflow-auto overscroll-none rounded-t-2xl border shadow-2xl md:flex-row md:rounded-xl">
             <figure
                 className="bg-muted h-full w-full flex-shrink  md:max-h-[calc(-4rem+100vh)]"
                 style={{
