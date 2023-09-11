@@ -34,9 +34,6 @@ const nextConfig = {
                 "NOTION_POSTS_DATABASE",
                 "NOTION_COLLECTIONS_DATABASE",
                 "ENCRYPT_KEY",
-                "DISCORD_TOKEN",
-                "DISCORD_APPLICATION_ID",
-                "MIDJOURNEY_ID"
             ])
         )
         return config;
