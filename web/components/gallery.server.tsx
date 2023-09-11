@@ -7,6 +7,7 @@ import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { NotionImageDatabaseItem } from "@hugo/notion";
 import { CollectionsBadges } from "@/components/collections.server";
+import { ImageClient } from "@/components/gallery.client";
 
 const masonryProps = {
     className: "flex gap-4",
@@ -69,18 +70,16 @@ const ImageWrapper: FC<NotionImageDatabaseItem> = (props) => {
                         aspectRatio: prompt.aspectRatio.split(":").join("/"),
                     }}
                 >
-                    <Suspense>
-                        <Image
-                            className="bg-muted h-full w-full rounded-t-md lg:rounded-md"
-                            src={url}
-                            alt={title}
-                            height={prompt.height / 3}
-                            width={prompt.width / 3}
-                            loading="lazy"
-                            quality={75}
-                            placeholder="empty"
-                        />
-                    </Suspense>
+                    <ImageClient
+                        className="bg-muted h-full w-full rounded-t-md lg:rounded-md"
+                        src={url}
+                        alt={title}
+                        height={prompt.height / 3}
+                        width={prompt.width / 3}
+                        loading="lazy"
+                        quality={75}
+                        placeholder="empty"
+                    />
                 </Link>
                 <div className="bg-background text-popover-foreground inset-x-0 bottom-0 flex flex-col items-start px-4 py-3 backdrop-blur backdrop-saturate-150 lg:absolute lg:bg-neutral-950/10 lg:text-white">
                     <p className="font-title line-clamp-1 text-sm font-semibold">
