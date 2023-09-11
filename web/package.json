@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "ui": "shadcn-ui",
-    "cloudflare": "pnpx @cloudflare/next-on-pages"
+    "cloudflare": "pnpx @cloudflare/next-on-pages@1",
+    "wrangler": "wrangler pages dev .vercel/output/static --compatibility-date 2023-09-03 --compatibility-flags=\"nodejs_compat\""
   },
   "dependencies": {
     "@hugo/notion": "workspace:^",
@@ -46,6 +47,8 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
-    "shadcn-ui": "^0.3.0"
+    "@cloudflare/next-on-pages": "^1.6.0",
+    "shadcn-ui": "^0.3.0",
+    "wrangler": "^3.7.0"
   }
 }

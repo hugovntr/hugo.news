@@ -1,3 +1,4 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
@@ -23,5 +24,22 @@ const nextConfig = {
             preventFullImport: true,
         },
     },
+
+    webpack: (config, { webpack }) => {
+        // noinspection JSUnresolvedReference
+        config.plugins.push(
+            new webpack.EnvironmentPlugin([
+                "NOTION_TOKEN",
+                "NOTION_IMAGES_DATABASE",
+                "NOTION_POSTS_DATABASE",
+                "NOTION_COLLECTIONS_DATABASE",
+                "ENCRYPT_KEY",
+                "DISCORD_TOKEN",
+                "DISCORD_APPLICATION_ID",
+                "MIDJOURNEY_ID"
+            ])
+        )
+        return config;
+    }
 };
 export default nextConfig

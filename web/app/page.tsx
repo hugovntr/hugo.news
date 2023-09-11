@@ -122,7 +122,7 @@ const Page: NextPage = async () => {
 };
 
 const Gallery: FC = async () => {
-    const data = await fetchImages({ page_size: 10 });
+    const data = await fetchImages({ page_size: 12 });
 
     return (
         <>

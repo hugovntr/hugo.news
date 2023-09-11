@@ -100,11 +100,7 @@ const CollectionWrapper: FC<NotionImageCollectionDatabaseItem> = async (
     );
 
     return (
-        <Link
-            href={`/gallery/collections/${id}`}
-            className="group"
-            prefetch={false}
-        >
+        <Link href={`/gallery/collections/${id}`} className="group">
             <div className="grid aspect-[4/3] grid-cols-3 grid-rows-2 overflow-hidden rounded-md transition-opacity group-hover:opacity-80">
                 {colImages.map((image) => (
                     <CollectionImage

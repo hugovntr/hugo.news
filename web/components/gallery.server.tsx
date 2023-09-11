@@ -65,7 +65,6 @@ const ImageWrapper: FC<NotionImageDatabaseItem> = (props) => {
                 <Link
                     href={`/gallery/images/${props.id}`}
                     className="h-full"
-                    prefetch={false}
                     style={{
                         aspectRatio: prompt.aspectRatio.split(":").join("/"),
                     }}
