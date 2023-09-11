@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ImageClient } from "@/components/gallery.client";
 
 export const CollectionsBadges: FC<{
     ids: string[];
@@ -147,18 +148,16 @@ const CollectionImage: FC<NotionImageDatabaseItem & { gridSize: number }> = (
                 "first:col-span-2 first:row-span-2": gridSize === 3,
             })}
         >
-            <Suspense>
-                <Image
-                    className="bg-muted h-full w-full object-cover object-center"
-                    src={url}
-                    alt={title}
-                    height={height / 3}
-                    width={width / 3}
-                    loading="lazy"
-                    placeholder="empty"
-                    quality={75}
-                />
-            </Suspense>
+            <ImageClient
+                className="bg-muted h-full w-full object-cover object-center"
+                src={url}
+                alt={title}
+                height={height / 3}
+                width={width / 3}
+                loading="lazy"
+                placeholder="empty"
+                quality={75}
+            />
         </div>
     );
 };
