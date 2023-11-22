@@ -49,6 +49,6 @@ export function parsePrompt(text: string): Prompt {
             const size = SIZES[acc.aspectRatio];
             return { ...acc, ...size };
         },
-        { text: [], raw: text, aspectRatio: "1:1", height: 400, width: 400 }
+        { text: [], raw: text, aspectRatio: "1:1", height: 1024, width: 1024 }
     );
 }

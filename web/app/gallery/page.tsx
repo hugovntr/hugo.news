@@ -1,8 +1,18 @@
-import { ImageGallery } from "@/components/gallery.server";
+import {
+    ImageGallery,
+    ImageGalleryFallback,
+} from "@/components/gallery.server";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchImages } from "@hugo/notion";
+import { fetchCollections, fetchImages } from "@hugo/notion";
+import { Button } from "@/components/ui/button";
+import { ArrowUpRight } from "lucide-react";
+import {
+    ImageCollections,
+    ImageCollectionsFallback,
+} from "@/components/collections.server";
+import { FC, Suspense } from "react";
 
 export const metadata: Metadata = {
     title: "AI Gallery | Hugo Ventura.",
@@ -11,38 +21,81 @@ export const metadata: Metadata = {
 export const revalidate = 120;
 
 export default async function Page() {
-    const data = await fetchImages({ page_size: 50 });
     return (
-        <div>
+        <>
+            <div className="container mb-32">
+                <div className="mx-auto mb-16 max-w-xl">
+                    <h2 className="font-title text-2xl font-semibold">
+                        Images
+                    </h2>
+                    <p>
+                        The latest images that I generated using{" "}
+                        <Button
+                            variant="link"
+                            className="px-0 text-base"
+                            asChild
+                        >
+                            <Link
+                                href="https://midjourney.com/"
+                                target="_blank"
+                            >
+                                Midjourney
+                            </Link>
+                        </Button>{" "}
+                        and/or{" "}
+                        <Button
+                            variant="link"
+                            className="px-0 text-base"
+                            asChild
+                        >
+                            <Link
+                                href="https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+                                target="_blank"
+                            >
+                                Stable Diffusion
+                            </Link>
+                        </Button>
+                    </p>
+                </div>
+                <Suspense fallback={<ImageGalleryFallback />}>
+                    <Gallery />
+                </Suspense>
+            </div>
             <div className="container">
-                <Link href="/">
-                    <Image
-                        src={"https://avatars.githubusercontent.com/hugovntr"}
-                        height={96}
-                        width={96}
-                        className="bg-muted mx-auto mt-4 h-12 w-12 rounded-full object-cover"
-                        alt="Hugo Ventura"
-                    />
-                </Link>
+                <div className="mx-auto mb-16 max-w-xl">
+                    <h2 className="font-title text-2xl font-semibold">
+                        Collections
+                    </h2>
+                    <p>
+                        All the images that I generated are grouped into
+                        multiple collections, depending on the theme or the
+                        actual &quot;collection&quot; they represent
+                    </p>
+                </div>
+                <Suspense fallback={<ImageCollectionsFallback />}>
+                    <ImageCollections collections={await fetchCollections()} />
+                </Suspense>
             </div>
-            <div className="container max-w-xl py-24">
-                <h1 className="font-title mb-2 text-2xl font-semibold">
-                    AI Gallery
-                </h1>
-                <p>
-                    In 2022 I stumbled upon a post on X (prev. Twitter) about{" "}
-                    <Link href="https://midjourney.com" className="link">
-                        Midjourney
-                    </Link>
-                </p>
-                <p>
-                    Since then, I&apos;ve playing and experimenting with all
-                    kinds of Generative AI.
-                </p>
-            </div>
-            <div className="container">
-                <ImageGallery images={data.images} />
-            </div>
-        </div>
+        </>
     );
 }
+
+const Gallery: FC = async () => {
+    const data = await fetchImages({ page_size: 5 });
+
+    return (
+        <>
+            <ImageGallery images={data.images} />
+            {data.more && (
+                <div className="mt-8 flex justify-center">
+                    <Button asChild variant="ghost">
+                        <Link href={"/gallery/images"}>
+                            <span>View more</span>
+                            <ArrowUpRight className="ml-2 h-4 w-4" />
+                        </Link>
+                    </Button>
+                </div>
+            )}
+        </>
+    );
+};

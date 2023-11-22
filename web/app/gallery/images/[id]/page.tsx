@@ -50,40 +50,40 @@ export async function generateStaticParams() {
 
 export const revalidate = 120;
 
-export async function generateMetadata({
-    params,
-}: PageProps): Promise<Metadata> {
-    const { properties, id } = await fetchImage(params.id);
-    const infos = getImageInfos(properties);
-    if (!infos) notFound();
-
-    // const payload: OGPayload = {
-    //     title: infos.title,
-    //     url: infos.url,
-    //     withPrompt: infos.share,
-    // };
-
-    // const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
-    //
-    // const token = await getToken(base64data);
-
-    return {
-        title: `${infos?.title} | Hugo Ventura.`,
-        authors: {
-            url: "https://hugo.news",
-            name: "Hugo Ventura",
-        },
-        openGraph: {
-            // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
-            url: `/gallery/images/${id}`,
-        },
-        twitter: {
-            card: "summary_large_image",
-            title: `${infos?.title} | Hugo Ventura.`,
-            // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
-        },
-    };
-}
+// export async function generateMetadata({
+//     params,
+// }: PageProps): Promise<Metadata> {
+//     const { properties, id } = await fetchImage(params.id);
+//     const infos = getImageInfos(properties);
+//     if (!infos) notFound();
+//
+//     // const payload: OGPayload = {
+//     //     title: infos.title,
+//     //     url: infos.url,
+//     //     withPrompt: infos.share,
+//     // };
+//
+//     // const base64data = Buffer.from(JSON.stringify(payload)).toString("base64");
+//     //
+//     // const token = await getToken(base64data);
+//
+//     return {
+//         title: `${infos?.title} | Hugo Ventura.`,
+//         authors: {
+//             url: "https://hugo.news",
+//             name: "Hugo Ventura",
+//         },
+//         openGraph: {
+//             // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
+//             url: `/gallery/images/${id}`,
+//         },
+//         twitter: {
+//             card: "summary_large_image",
+//             title: `${infos?.title} | Hugo Ventura.`,
+//             // images: [{ url: `/api/og?data=${base64data}&token=${token}` }],
+//         },
+//     };
+// }
 
 export default async function Page({ params }: PageProps) {
     const { properties } = await fetchImage(params.id);

@@ -1,6 +1,6 @@
 "use client";
 
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import {
     DropdownMenu,
@@ -9,12 +9,24 @@ import {
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { Moon, Sun } from "lucide-react";
+import { Moon, Sun, Loader2 } from "lucide-react";
 
 export { ThemeProvider } from "next-themes";
 
 export const ThemeSwitcher: FC = () => {
+    const [mounted, setMounted] = useState(false);
     const { setTheme } = useTheme();
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    if (!mounted)
+        return (
+            <Button variant="outline" size="icon">
+                <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
+            </Button>
+        );
 
     return (
         <DropdownMenu>

@@ -2,7 +2,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        appDir: true,
         externalDir: true
     },
     images: {
@@ -34,6 +33,7 @@ const nextConfig = {
                 "NOTION_POSTS_DATABASE",
                 "NOTION_COLLECTIONS_DATABASE",
                 "ENCRYPT_KEY",
+                "GH_TOKEN",
             ])
         )
         return config;

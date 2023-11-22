@@ -59,13 +59,6 @@ export default function RootLayout(props: RootLayoutProps) {
                     enableSystem={true}
                 >
                     <main>{children}</main>
-                    <footer className="bg-muted mt-16 py-16">
-                        <div className="container flex justify-center">
-                            <p className="text-muted-foreground text-sm">
-                                &copy; {new Date().getFullYear()} • Hugo Ventura
-                            </p>
-                        </div>
-                    </footer>
                     <Toaster />
                     {modal}
                 </ThemeProvider>
