@@ -11,8 +11,6 @@ import { CollectionsBadges } from "@/components/collections.server";
 import { fetchImage, fetchImages } from "@hugo/notion";
 import { Suspense } from "react";
 
-export const runtime = "edge";
-
 interface PageProps {
     params: {
         id: string;

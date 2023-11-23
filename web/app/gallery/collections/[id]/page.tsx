@@ -21,7 +21,6 @@ interface PageProps {
     };
 }
 
-export const runtime = "edge";
 export const revalidate = 120;
 
 export default async function Page({ params }: PageProps) {

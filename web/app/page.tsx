@@ -6,12 +6,8 @@ import { ThemeSwitcher } from "@/components/theme";
 import { cache, Suspense } from "react";
 import { Octokit } from "@octokit/core";
 import { type Commit, type User } from "@octokit/graphql-schema";
-import { Badge } from "@/components/ui/badge";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-
-export const runtime = "edge";
-export const revalidate = 10000;
 
 const Page: NextPage = async () => {
     return (
