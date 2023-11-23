@@ -3,11 +3,12 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { ThemeSwitcher } from "@/components/theme";
-import { cache } from "react";
+import { cache, Suspense } from "react";
 import { Octokit } from "@octokit/core";
 import { type Commit, type User } from "@octokit/graphql-schema";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight, Github } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const runtime = "edge";
 export const revalidate = 10000;
@@ -77,11 +78,7 @@ const Page: NextPage = async () => {
                     <ThemeSwitcher />
                 </div>
             </div>
-            <div className="divide-accent container my-12 grid max-w-prose grid-cols-1 gap-12 lg:grid-cols-2">
-                <GitHubCard />
-                <HuggingFaceCard />
-            </div>
-            <div className="prose dark:prose-invert container">
+            <div className="prose dark:prose-invert container mt-12">
                 <p>
                     Passionate software engineer with over 10 years of
                     experience,
@@ -99,12 +96,24 @@ const Page: NextPage = async () => {
                     . This journey is fueled by a love for pushing the
                     boundaries of technology.
                 </p>
+            </div>
+            <div className="divide-accent container my-12 grid max-w-prose grid-cols-1 gap-12 lg:grid-cols-2">
+                <Suspense fallback={<FallbackCard />}>
+                    <GitHubCard />
+                </Suspense>
+                <Suspense fallback={<FallbackCard />}>
+                    <HuggingFaceCard />
+                </Suspense>
+            </div>
+            <div className="prose dark:prose-invert container mb-16">
                 <p>
                     A meaningful example that reflects my values is my
                     commitment to knowledge-sharing. Having self-taught much of
                     what I know, I understand the challenges of that journey. In
                     response, I actively share my insights and learnings online,
                     be it through various platforms or contributing to projects.
+                </p>
+                <p>
                     My intent is not just to educate, but to provide a helping
                     hand by sharing the discoveries and experiences that would
                     have greatly benefited me when I first started. It is my way
@@ -216,6 +225,18 @@ const HuggingFaceCard = () => {
             </div>
             <ArrowUpRight className="ml-auto h-5 w-5 flex-shrink-0" />
         </Link>
+    );
+};
+
+const FallbackCard = () => {
+    return (
+        <div className="bg-background flex items-center gap-4">
+            <Skeleton className="h-14 w-14 flex-shrink-0 rounded-full" />
+            <div className="flex-1 space-y-2">
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-1/3" />
+            </div>
+        </div>
     );
 };
 
