@@ -215,9 +215,7 @@ const HuggingFaceCard = () => {
             </figure>
             <div>
                 <p className="font-title font-semibold">Syntonomous</p>
-                <p>
-                    <span className="tabular-nums">2</span> models
-                </p>
+                <p className="text-sm">AI Research Lab</p>
             </div>
             <ArrowUpRight className="ml-auto h-5 w-5 flex-shrink-0" />
         </Link>
