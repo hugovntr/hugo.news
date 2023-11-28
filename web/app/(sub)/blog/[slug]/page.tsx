@@ -71,6 +71,6 @@ export default async function Page({ params }: { params: { slug: string } }) {
     );
 }
 
-export async function generateStaticParams() {
-    return manager.entries().map((slug) => ({ slug }));
-}
+// export async function generateStaticParams() {
+//     return manager.entries().map((slug) => ({ slug }));
+// }
