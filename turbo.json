@@ -5,6 +5,7 @@
       "cache": false
     },
     "build": {
+		"cache": false,
       "outputs": ["web/.next/**", "!web/.next/cache/**", "discord/dist/**"]
     },
     "cloudflare": {
