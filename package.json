@@ -9,7 +9,7 @@
   },
   "license": "ISC",
   "scripts": {
-    "preinstall": "node submodule.js",
+    "preinstall": "node submodule.js && git submodule update --recursive --remote",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "build:vercel": "turbo run build --filter web",
