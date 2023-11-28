@@ -5,7 +5,7 @@ import {
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchCollections, fetchImages } from "@hugo/notion";
+import { fetchCollections, fetchImages } from "../../../../packages/notion";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight } from "lucide-react";
 import {

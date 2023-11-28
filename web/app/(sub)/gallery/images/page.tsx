@@ -2,7 +2,7 @@ import { ImageGallery } from "@/components/gallery.server";
 import { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { fetchImages } from "@hugo/notion";
+import { fetchImages } from "../../../../../packages/notion";
 
 export const metadata: Metadata = {
     title: "AI Gallery | Hugo Ventura.",

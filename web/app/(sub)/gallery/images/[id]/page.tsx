@@ -8,7 +8,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import type { OGPayload } from "@/app/api/og/route";
 import { CollectionsBadges } from "@/components/collections.server";
-import { fetchImage, fetchImages } from "@hugo/notion";
+import { fetchImage, fetchImages } from "../../../../../../packages/notion";
 import { Suspense } from "react";
 
 interface PageProps {

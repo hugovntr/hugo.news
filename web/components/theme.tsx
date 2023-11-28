@@ -23,7 +23,7 @@ export const ThemeSwitcher: FC = () => {
 
     if (!mounted)
         return (
-            <Button variant="outline" size="icon">
+            <Button variant="outline" size="icon" disabled>
                 <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
             </Button>
         );

@@ -9,3 +9,7 @@ node_modules/
 # IDE
 .idea/
 .vscode/
+
+# Submodules
+.gitmodules
+content/

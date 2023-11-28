@@ -67,6 +67,11 @@
     --ring: 0 0% 14.9%;
   }
 }
+
+section.footnotes {
+  @apply mt-8 border-t border-gray-200 dark:border-gray-700;
+}
+
  
 @layer base {
   * {

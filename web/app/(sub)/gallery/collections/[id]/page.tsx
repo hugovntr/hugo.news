@@ -13,7 +13,7 @@ import {
     fetchCollection,
     fetchCollectionImages,
     Block,
-} from "@hugo/notion";
+} from "../../../../../../packages/notion";
 
 interface PageProps {
     params: {
@@ -32,19 +32,8 @@ export default async function Page({ params }: PageProps) {
     const blocks = await fetchBlocks(params.id);
 
     return (
-        <div>
-            <div className="container my-8">
-                <Link href="/">
-                    <Image
-                        src={"https://avatars.githubusercontent.com/hugovntr"}
-                        height={96}
-                        width={96}
-                        className="bg-muted mx-auto h-12 w-12 rounded-full object-cover"
-                        alt="Hugo Ventura"
-                    />
-                </Link>
-            </div>
-            <div className="container max-w-xl py-24">
+        <>
+            <div className="container mb-24 max-w-xl">
                 <h1 className="font-title mb-2 text-2xl font-semibold">
                     {title}
                 </h1>
@@ -57,7 +46,7 @@ export default async function Page({ params }: PageProps) {
                     <Gallery id={params.id} />
                 </Suspense>
             </div>
-        </div>
+        </>
     );
 }
 

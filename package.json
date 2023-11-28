@@ -9,6 +9,7 @@
   },
   "license": "ISC",
   "scripts": {
+    "preinstall": "node submodule.js",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "build:vercel": "turbo run build --filter web",

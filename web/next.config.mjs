@@ -2,7 +2,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     experimental: {
-        externalDir: true
+        externalDir: true,
+        serverComponentsExternalPackages: ["vscode-oniguruma", "shiki"]
     },
     images: {
         disableStaticImages: true,
